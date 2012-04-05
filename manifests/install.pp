@@ -7,7 +7,7 @@ define kmod::install($ensure=present, $command='/bin/true') {
       }
       
       augeas {"install module ${name}":
-        context => '/etc/modprobe.d/modprobe.conf',
+        context => '/files/etc/modprobe.d/modprobe.conf',
         changes => [
           "set /install[. = '${name}'] ${name}",
           "set /install[. = '${name}']/command '${command}'",
@@ -21,7 +21,7 @@ define kmod::install($ensure=present, $command='/bin/true') {
       }
 
       augeas {"remove module ${name}":
-        context => '/etc/modprobe.d/modprobe.conf',
+        context => '/files/etc/modprobe.d/modprobe.conf',
         changes => "rm /install[. = '${name}']",
       }
     }
