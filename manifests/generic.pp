@@ -16,7 +16,7 @@ define kmod::generic(
       exec {"modprobe ${module}":
         unless => "egrep -q '^${module} ' /proc/modules",
       }
-      
+
       if $command {
         augeas {"${type} module ${module}":
           context => "/files${filepath}",
@@ -32,12 +32,11 @@ define kmod::generic(
           changes => [ "set ${type}[. = '${module}'] ${module}" ],
           onlyif  => "match ${type}[. = '${module}'] size == 0",
         }
-  
       }
     }
 
     absent: {
-      exec {"modprobe -r ${module}": 
+      exec {"modprobe -r ${module}":
         onlyif => "egrep -q '^${module} ' /proc/modules",
       }
 
