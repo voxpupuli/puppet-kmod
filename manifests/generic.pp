@@ -24,11 +24,13 @@ define kmod::generic(
                 "set ${type}[. = '${module}'] ${module}",
                 "set ${type}[. = '${module}']/command '${command}'",
                 ],
+          onlyif  => "match ${type}[. = '${module}'] size == 0",
         }
       } else {
         augeas {"${type} module ${module}":
           context => "/files${filepath}",
           changes => [ "set ${type}[. = '${module}'] ${module}" ],
+          onlyif  => "match ${type}[. = '${module}'] size == 0",
         }
   
       }
@@ -42,6 +44,7 @@ define kmod::generic(
       augeas {"remove module ${module}":
         context => "/files${filepath}",
         changes => "rm ${type}[. = '${module}']",
+        onlyif  => "match ${type}[. = '${module}'] size > 0",
       }
     }
 
