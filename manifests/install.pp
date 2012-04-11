@@ -1,32 +1,30 @@
-define kmod::install($ensure=present, $command='/bin/true') {
+/*
 
-  case $ensure {
-    present: {
-      exec {"modprobe ${name}":
-        unless => "egrep -q '^${name} ' /proc/modules",
-      }
-      
-      augeas {"install module ${name}":
-        context => '/files/etc/modprobe.d/modprobe.conf',
-        changes => [
-          "set /install[. = '${name}'] ${name}",
-          "set /install[. = '${name}']/command '${command}'",
-        ],
-      }
-    }
+== Definition: kmod::install
 
-    absent: {
-      exec {"modprobe -r ${name}": 
-        onlyif => "egrep -q '^${name} ' /proc/modules",
-      }
+Set a kernel module as installed.
 
-      augeas {"remove module ${name}":
-        context => '/files/etc/modprobe.d/modprobe.conf',
-        changes => "rm /install[. = '${name}']",
-      }
-    }
+Parameters:
+- *ensure*: present/absent;
+- *command*: optionally, set the command associated with the kernel module;
+- *file*: optionally, set the file where the stanza is written.
 
-    default: { err ( "unknown ensure value ${ensure}" ) }
+Example usage:
+
+  kmod::install { 'pcspkr': }
+
+*/
+
+define kmod::install(
+  $ensure=present,
+  $command='/bin/true',
+  $file=''
+) {
+  kmod::generic {"install ${name}":
+    ensure   => $ensure,
+    type     => 'install',
+    module   => $name,
+    command  => $command,
+    file     => $file,
   }
-
 }

@@ -1,0 +1,15 @@
+= Kmod Puppet module =
+
+== Usage ==
+
+  See kmod::install and kmod::blacklist
+
+== Description ==
+
+This module provides definitions to manipulate modprobe.conf (5) stanzas:
+
+ o kmod::install
+
+ o kmod::blacklist
+
+It depends on Augeas with the modprobe lens.
