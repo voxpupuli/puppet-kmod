@@ -16,7 +16,7 @@ Example usage:
 
 define kmod::blacklist(
   $ensure=present,
-  $file=''
+  $file='/etc/modprobe.d/blacklist.conf'
 ) {
   kmod::generic {"blacklist ${name}":
     ensure  => $ensure,

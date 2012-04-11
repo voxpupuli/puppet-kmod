@@ -25,13 +25,8 @@ define kmod::generic(
   $module,
   $ensure=present,
   $command='',
-  $file=''
+  $file='/etc/modprobe.d/modprobe.conf'
 ) {
-
-  $filepath = $file ? {
-    ''      => '/etc/modprobe.d/modprobe.conf',
-    default => $file,
-  }
 
   case $ensure {
     present: {
@@ -41,7 +36,7 @@ define kmod::generic(
 
       if $command {
         augeas {"${type} module ${module}":
-          context => "/files${filepath}",
+          context => "/files${file}",
           changes => [
                 "set ${type}[. = '${module}'] ${module}",
                 "set ${type}[. = '${module}']/command '${command}'",
@@ -50,7 +45,7 @@ define kmod::generic(
         }
       } else {
         augeas {"${type} module ${module}":
-          context => "/files${filepath}",
+          context => "/files${file}",
           changes => [ "set ${type}[. = '${module}'] ${module}" ],
           onlyif  => "match ${type}[. = '${module}'] size == 0",
         }
@@ -63,7 +58,7 @@ define kmod::generic(
       }
 
       augeas {"remove module ${module}":
-        context => "/files${filepath}",
+        context => "/files${file}",
         changes => "rm ${type}[. = '${module}']",
         onlyif  => "match ${type}[. = '${module}'] size > 0",
       }
