@@ -30,8 +30,10 @@ define kmod::generic(
 
   case $ensure {
     present: {
-      exec {"modprobe ${module}":
-        unless => "egrep -q '^${module} ' /proc/modules",
+      if $type == 'install' {
+        exec {"modprobe ${module}":
+          unless => "egrep -q '^${module} ' /proc/modules",
+        }
       }
 
       if $command {
