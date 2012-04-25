@@ -28,6 +28,8 @@ define kmod::generic(
   $file
 ) {
 
+  include kmod
+
   case $ensure {
     present: {
       if $type == 'install' {
@@ -56,6 +58,7 @@ define kmod::generic(
         context => "/files${file}",
         changes => $augset,
         onlyif  => $onlyif,
+        require => File[$file],
       }
     }
 
@@ -68,6 +71,7 @@ define kmod::generic(
         context => "/files${file}",
         changes => "rm ${type}[. = '${module}']",
         onlyif  => "match ${type}[. = '${module}'] size > 0",
+        require => File[$file],
       }
     }
 
