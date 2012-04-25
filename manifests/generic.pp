@@ -25,7 +25,7 @@ define kmod::generic(
   $module,
   $ensure=present,
   $command='',
-  $file='/etc/modprobe.d/modprobe.conf'
+  $file
 ) {
 
   case $ensure {
