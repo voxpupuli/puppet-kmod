@@ -18,7 +18,7 @@ Example usage:
 define kmod::install(
   $ensure=present,
   $command='/bin/true',
-  $file=''
+  $file='/etc/modprobe.d/modprobe.conf'
 ) {
   kmod::generic {"install ${name}":
     ensure   => $ensure,
