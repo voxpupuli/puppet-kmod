@@ -25,8 +25,10 @@ define kmod::generic(
   $module,
   $ensure=present,
   $command='',
-  $file='/etc/modprobe.d/modprobe.conf'
+  $file
 ) {
+
+  include kmod
 
   case $ensure {
     present: {
@@ -37,20 +39,26 @@ define kmod::generic(
       }
 
       if $command {
-        augeas {"${type} module ${module}":
-          context => "/files${file}",
-          changes => [
-                "set ${type}[. = '${module}'] ${module}",
-                "set ${type}[. = '${module}']/command '${command}'",
-                ],
-          onlyif  => "match ${type}[. = '${module}'] size == 0",
+        # modprobe.conf usage changes in 0.10.0
+        if versioncmp($augeasversion, '0.9.0') < 0 {
+          $augset = "set ${type}[. = '${module}'] '${module} ${command}'"
+          $onlyif = "match ${type}[. = '${module} ${command}'] size == 0"
+        } else {
+          $augset = [
+            "set ${type}[. = '${module}'] ${module}",
+            "set ${type}[. = '${module}']/command '${command}'",
+          ]
+          $onlyif = "match ${type}[. = '${module}'] size == 0"
         }
       } else {
-        augeas {"${type} module ${module}":
-          context => "/files${file}",
-          changes => [ "set ${type}[. = '${module}'] ${module}" ],
-          onlyif  => "match ${type}[. = '${module}'] size == 0",
-        }
+        $augset = "set ${type}[. = '${module}'] ${module}"
+      }
+
+      augeas {"${type} module ${module}":
+        context => "/files${file}",
+        changes => $augset,
+        onlyif  => $onlyif,
+        require => File[$file],
       }
     }
 
@@ -63,6 +71,7 @@ define kmod::generic(
         context => "/files${file}",
         changes => "rm ${type}[. = '${module}']",
         onlyif  => "match ${type}[. = '${module}'] size > 0",
+        require => File[$file],
       }
     }
 
