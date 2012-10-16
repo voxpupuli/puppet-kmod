@@ -55,7 +55,8 @@ define kmod::generic(
       }
 
       augeas {"${type} module ${module}":
-        context => "/files${file}",
+        incl    => $file,
+        lens    => 'Modprobe.lns',
         changes => $augset,
         onlyif  => $onlyif,
         require => File[$file],
@@ -68,7 +69,8 @@ define kmod::generic(
       }
 
       augeas {"remove module ${module}":
-        context => "/files${file}",
+        incl    => $file,
+        lens    => 'Modprobe.lns',
         changes => "rm ${type}[. = '${module}']",
         onlyif  => "match ${type}[. = '${module}'] size > 0",
         require => File[$file],
