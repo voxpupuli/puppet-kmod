@@ -33,8 +33,9 @@ define kmod::generic(
   case $ensure {
     present: {
       if $type == 'install' {
-        exec {"modprobe ${module}":
-          unless => "egrep -q '^${module} ' /proc/modules",
+        kmod::load { $module:
+          ensure => present,
+          after  => Augeas["${type} module ${module}"],
         }
       }
 
@@ -64,8 +65,8 @@ define kmod::generic(
     }
 
     absent: {
-      exec {"modprobe -r ${module}":
-        onlyif => "egrep -q '^${module} ' /proc/modules",
+      kmod::load { $module:
+        ensure => absent,
       }
 
       augeas {"remove module ${module}":
