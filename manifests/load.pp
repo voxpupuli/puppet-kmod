@@ -22,10 +22,18 @@ define kmod::load(
   case $ensure {
     present: {
       $changes = "clear ${name}"
+
+      exec { "modprobe ${name}":
+        unless => "egrep -q '^${name} ' /proc/modules",
+      }
     }
 
     absent: {
       $changes = "rm ${name}"
+
+      exec { "modprobe -r ${name}":
+        onlyif => "egrep -q '^${name} ' /proc/modules",
+      }
     }
 
     default: { err ( "unknown ensure value ${ensure}" ) }
