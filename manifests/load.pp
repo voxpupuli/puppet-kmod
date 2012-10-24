@@ -21,18 +21,27 @@ define kmod::load(
 
   case $ensure {
     present: {
-      $changes = "clear ${name}"
+      $changes = "clear '${name}'"
+
+      exec { "modprobe ${name}":
+        unless => "egrep -q '^${name} ' /proc/modules",
+      }
     }
 
     absent: {
-      $changes = "rm ${name}"
+      $changes = "rm '${name}'"
+
+      exec { "modprobe -r ${name}":
+        onlyif => "egrep -q '^${name} ' /proc/modules",
+      }
     }
 
     default: { err ( "unknown ensure value ${ensure}" ) }
   }
 
   augeas {"Manage ${name} in ${file}":
-    context => "/files${file}",
+    incl    => $file,
+    lens    => 'Modules.lns',
     changes => $changes,
   }
 }
