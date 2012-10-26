@@ -34,8 +34,8 @@ define kmod::generic(
     present: {
       if $type == 'install' {
         kmod::load { $module:
-          ensure => $ensure,
-          after  => Augeas["${type} module ${module}"],
+          ensure  => $ensure,
+          require => Augeas["${type} module ${module}"],
         }
       }
 
