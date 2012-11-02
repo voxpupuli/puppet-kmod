@@ -39,9 +39,20 @@ define kmod::load(
     default: { err ( "unknown ensure value ${ensure}" ) }
   }
 
-  augeas {"Manage ${name} in ${file}":
-    incl    => $file,
-    lens    => 'Modules.lns',
-    changes => $changes,
+  case $::osfamily {
+    'Debian': {
+      augeas {"Manage ${name} in ${file}":
+        incl    => $file,
+        lens    => 'Modules.lns',
+        changes => $changes,
+      }
+    }
+    'RedHat': {
+      file { "/etc/sysconfig/modules/${name}.modules":
+        ensure  => $ensure,
+        mode    => 0755,
+        content => template('kmod/redhat.modprobe.erb'),
+      }
+    }
   }
 }
