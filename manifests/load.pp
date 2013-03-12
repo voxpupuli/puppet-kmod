@@ -19,6 +19,10 @@ define kmod::load(
   $file='/etc/modules'
 ) {
 
+  exec { "modinfo ${name}":
+    unless => "egrep -q '^${name} ' /proc/modules",
+  }
+
   case $ensure {
     present: {
       $changes = "clear '${name}'"
