@@ -33,7 +33,7 @@ define kmod::alias(
     }
 
     absent: {
-      kmod::load { $module:
+      kmod::load { $name:
         ensure => $ensure,
       }
 
