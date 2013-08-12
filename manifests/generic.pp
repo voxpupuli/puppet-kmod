@@ -41,7 +41,7 @@ define kmod::generic(
 
       if $command {
         # modprobe.conf usage changes in 0.10.0
-        if versioncmp($augeasversion, '0.9.0') < 0 {
+        if versioncmp($::augeasversion, '0.9.0') < 0 {
           $augset = "set ${type}[. = '${module}'] '${module} ${command}'"
           $onlyif = "match ${type}[. = '${module} ${command}'] size == 0"
         } else {
