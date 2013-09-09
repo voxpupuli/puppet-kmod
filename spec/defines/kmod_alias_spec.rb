@@ -23,6 +23,7 @@ describe 'kmod::alias', :type => :define do
     end
     it { should include_class('kmod') }
     it { should contain_kmod__alias('foo') }
+    it { should contain_kmod__load('foo').with({ 'ensure' => 'absent' }) }
     it { should contain_augeas('remove modprobe alias foo').with({
       'incl'    => '/baz',
       'lens'    => 'Modprobe.lns',

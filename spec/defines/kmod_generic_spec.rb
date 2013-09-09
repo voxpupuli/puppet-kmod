@@ -20,13 +20,28 @@ describe 'kmod::generic', :type => :define do
         let(:params) do
           default_params.merge!({ :command => '/bin/true' })
         end
-        it { should contain_augeas('install module foo').with({
-          'incl'    => 'modprobe.conf',
-          'lens'    => 'Modprobe.lns',
-          'changes' => "set install[. = 'foo'] 'foo /bin/true'",
-          'onlyif'  => "match install[. = 'foo /bin/true'] size == 0",
-          'require' => 'File[modprobe.conf]'
-        })}
+        
+        context 'with augeasversion < "0.9.0"' do
+          let(:facts) do { :augeasversion => '0.8.9' } end
+          it { should contain_augeas('install module foo').with({
+            'incl'    => 'modprobe.conf',
+            'lens'    => 'Modprobe.lns',
+            'changes' => "set install[. = 'foo'] 'foo /bin/true'",
+            'onlyif'  => "match install[. = 'foo /bin/true'] size == 0",
+            'require' => 'File[modprobe.conf]'
+          }) }
+        end
+
+        context 'with augeasversion >= "0.9.0"' do
+          let(:facts) do { :augeasversion => '0.9.0' } end
+          it { should contain_augeas('install module foo').with({
+            'incl'    => 'modprobe.conf',
+            'lens'    => 'Modprobe.lns',
+            'changes' => ["set install[. = 'foo'] foo","set install[. = 'foo']/command '/bin/true'"],
+            'onlyif'  => "match install[. = 'foo'] size == 0",
+            'require' => 'File[modprobe.conf]'
+          }) }
+        end
       end
 
       context 'without command set' do
