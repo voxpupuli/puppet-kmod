@@ -53,6 +53,7 @@ define kmod::generic(
         }
       } else {
         $augset = "set ${type}[. = '${module}'] ${module}"
+        $onlyif = undef
       }
 
       augeas {"${type} module ${module}":
