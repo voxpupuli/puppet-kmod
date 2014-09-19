@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe 'kmod::generic', :type => :define do
   let(:title) { 'install foo' }
+  let(:facts) do { :osfamily => 'Debian', } end
   let(:default_params) do { :type => 'install', :module => 'foo', :file => 'modprobe.conf' } end
   let(:params) do default_params end
-  it { should include_class('kmod') }
   
   context 'install foo module' do
     let(:params) do default_params end 
@@ -22,7 +22,12 @@ describe 'kmod::generic', :type => :define do
         end
         
         context 'with augeasversion < "0.9.0"' do
-          let(:facts) do { :augeasversion => '0.8.9' } end
+          let(:facts) do
+            {
+              :augeasversion => '0.8.9',
+              :osfamily      => 'Debian',
+            }
+          end
           it { should contain_augeas('install module foo').with({
             'incl'    => 'modprobe.conf',
             'lens'    => 'Modprobe.lns',
@@ -33,7 +38,12 @@ describe 'kmod::generic', :type => :define do
         end
 
         context 'with augeasversion >= "0.9.0"' do
-          let(:facts) do { :augeasversion => '0.9.0' } end
+          let(:facts) do
+            {
+              :augeasversion => '0.9.0',
+              :osfamily      => 'Debian',
+            }
+          end
           it { should contain_augeas('install module foo').with({
             'incl'    => 'modprobe.conf',
             'lens'    => 'Modprobe.lns',

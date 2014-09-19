@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe 'kmod::alias', :type => :define do
   let(:title) { 'foo' }
+  let(:facts) do { :osfamily => 'Debian', } end
   let(:default_params) do { :source => 'bar', :file => '/baz' } end
   
   context 'when ensure is set to present' do
     let(:params) do default_params end
-    it { should include_class('kmod') }
     it { should contain_kmod__alias('foo') }
     it { should contain_augeas('modprobe alias foo bar').with({
       'incl'    => '/baz',
@@ -21,7 +21,6 @@ describe 'kmod::alias', :type => :define do
     let(:params) do
       default_params.merge!({ :ensure => 'absent' })
     end
-    it { should include_class('kmod') }
     it { should contain_kmod__alias('foo') }
     it { should contain_kmod__load('foo').with({ 'ensure' => 'absent' }) }
     it { should contain_augeas('remove modprobe alias foo').with({

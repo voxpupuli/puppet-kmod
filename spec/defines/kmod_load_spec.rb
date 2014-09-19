@@ -3,6 +3,7 @@ require 'spec_helper'
 describe 'kmod::load', :type => :define do
   let(:title) { 'foo' }
   context 'with ensure set to present' do
+    let(:facts) do { :osfamily => 'Debian' } end
     let(:params) do { :ensure => 'present', :file => '/foo/bar' } end
     it { should contain_kmod__load('foo') }
     it { should contain_exec('modprobe foo').with({'unless' => "egrep -q '^foo ' /proc/modules"}) }
@@ -27,6 +28,7 @@ describe 'kmod::load', :type => :define do
   end
 
   context 'with ensure set to absent' do
+    let(:facts) do { :osfamily => 'Debian' } end
     let(:params) do { :ensure => 'absent', :file => '/foo/bar' } end
     it { should contain_kmod__load('foo') }
     it { should contain_exec('modprobe -r foo').with({ 'onlyif' => "egrep -q '^foo ' /proc/modules" }) }
