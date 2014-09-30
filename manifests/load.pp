@@ -23,16 +23,16 @@ define kmod::load(
     present: {
       $changes = "clear '${name}'"
 
-      exec { "/sbin/modprobe ${name}":
-        unless => "/bin/egrep -q '^${name} ' /proc/modules",
+      exec { "modprobe ${name}":
+        unless => "egrep -q '^${name} ' /proc/modules",
       }
     }
 
     absent: {
       $changes = "rm '${name}'"
 
-      exec { "/sbin/modprobe -r ${name}":
-        onlyif => "/bin/egrep -q '^${name} ' /proc/modules",
+      exec { "modprobe -r ${name}":
+        onlyif => "egrep -q '^${name} ' /proc/modules",
       }
     }
 
