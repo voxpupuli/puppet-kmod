@@ -1,5 +1,8 @@
 # Kmod Puppet module
 
+[![Puppet Forge](http://img.shields.io/puppetforge/v/camptocamp/kmod.svg)](https://forge.puppetlabs.com/camptocamp/kmod)
+[![Build Status](https://travis-ci.org/camptocamp/puppet-kmod.png?branch=master)](https://travis-ci.org/camptocamp/puppet-kmod)
+
 ## Usage
 
 See inline doc inside:
