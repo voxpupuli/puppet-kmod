@@ -1,34 +1,31 @@
-/*
-
-== Definition: kmod::generic
-
-Set a kernel module in modprobe.conf (5).
-
-Parameters:
-- *type*: type of modprobe stanza (install/blacklist/etc);
-- *module*: module name;
-- *ensure*: present/absent;
-- *command*: optionally, set the command associated with the kernel module;
-- *file*: optionally, set the file where the stanza is written.
-
-Example usage:
-
-  kmod::generic {'install pcspkr':
-    type   => 'install',
-    module => 'pcspkr',
-  }
-
-*/
-
+#
+# == Definition: kmod::generic
+#
+# Set a kernel module in modprobe.conf (5).
+#
+# Parameters:
+# - *type*: type of modprobe stanza (install/blacklist/etc);
+# - *module*: module name;
+# - *ensure*: present/absent;
+# - *command*: optionally, set the command associated with the kernel module;
+# - *file*: optionally, set the file where the stanza is written.
+#
+# Example usage:
+#
+#   kmod::generic {'install pcspkr':
+#     type   => 'install',
+#     module => 'pcspkr',
+#   }
+#
 define kmod::generic(
   $type,
   $module,
+  $file,
   $ensure=present,
   $command='',
-  $file
 ) {
 
-  include kmod
+  include ::kmod
 
   case $ensure {
     present: {
