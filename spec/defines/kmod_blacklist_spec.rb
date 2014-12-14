@@ -6,7 +6,9 @@ describe 'kmod::blacklist', :type => :define do
   on_supported_os.each do |os, facts|
     context "on #{os}" do
       let(:facts) do
-        facts
+        facts.merge({
+          :augeasversion => '1.2.0',
+        })
       end
 
       context 'when ensure is set to present' do

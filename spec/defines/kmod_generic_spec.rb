@@ -6,7 +6,9 @@ describe 'kmod::generic', :type => :define do
   on_supported_os.each do |os, facts|
     context "on #{os}" do
       let(:facts) do
-        facts
+        facts.merge({
+          :augeasversion => '1.2.0',
+        })
       end
 
       let(:default_params) do { :type => 'install', :module => 'foo', :file => 'modprobe.conf' } end
