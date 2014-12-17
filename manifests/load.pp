@@ -21,6 +21,7 @@ define kmod::load(
       $changes = "clear '${name}'"
 
       exec { "modprobe ${name}":
+        path   => '/bin:/sbin:/usr/bin:/usr/sbin',
         unless => "egrep -q '^${name} ' /proc/modules",
       }
     }
@@ -29,6 +30,7 @@ define kmod::load(
       $changes = "rm '${name}'"
 
       exec { "modprobe -r ${name}":
+        path   => '/bin:/sbin:/usr/bin:/usr/sbin',
         onlyif => "egrep -q '^${name} ' /proc/modules",
       }
     }
