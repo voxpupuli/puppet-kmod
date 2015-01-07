@@ -28,7 +28,7 @@ define kmod::generic(
   include ::kmod
 
   case $ensure {
-    present: {
+    'present': {
       if $type == 'install' {
         kmod::load { $module:
           ensure  => $ensure,
@@ -62,7 +62,7 @@ define kmod::generic(
       }
     }
 
-    absent: {
+    'absent': {
       kmod::load { $module:
         ensure => $ensure,
       }

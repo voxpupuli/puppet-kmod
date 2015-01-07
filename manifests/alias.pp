@@ -15,7 +15,7 @@ define kmod::alias(
   include kmod
 
   case $ensure {
-    present: {
+    'present': {
       $augset = [
         "set alias[. = '${name}'] ${name}",
         "set alias[. = '${name}']/modulename ${source}",
@@ -32,7 +32,7 @@ define kmod::alias(
       }
     }
 
-    absent: {
+    'absent': {
       kmod::load { $name:
         ensure => $ensure,
       }

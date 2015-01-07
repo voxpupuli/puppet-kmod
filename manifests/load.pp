@@ -17,7 +17,7 @@ define kmod::load(
 ) {
 
   case $ensure {
-    present: {
+    'present': {
       $changes = "clear '${name}'"
 
       exec { "modprobe ${name}":
@@ -26,7 +26,7 @@ define kmod::load(
       }
     }
 
-    absent: {
+    'absent': {
       $changes = "rm '${name}'"
 
       exec { "modprobe -r ${name}":
