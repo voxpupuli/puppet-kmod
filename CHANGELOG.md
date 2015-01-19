@@ -1,3 +1,7 @@
+## 2015-01-19 - Release 1.0.5
+
+- Fix relative class inclusions
+
 ## 2015-01-07 - Release 1.0.4
 
 - Fix unquoted strings in cases
