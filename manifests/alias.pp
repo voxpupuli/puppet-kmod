@@ -12,7 +12,7 @@ define kmod::alias(
   $file   = '/etc/modprobe.d/aliases.conf',
 ) {
 
-  include kmod
+  include ::kmod
 
   case $ensure {
     'present': {
