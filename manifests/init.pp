@@ -13,6 +13,6 @@ class kmod {
       '/etc/modprobe.d/modprobe.conf',
       '/etc/modprobe.d/aliases.conf',
       '/etc/modprobe.d/blacklist.conf',
-    ]: ensure => present,
+    ]: ensure => file,
   }
 }
