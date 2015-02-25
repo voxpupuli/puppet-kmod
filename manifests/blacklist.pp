@@ -15,10 +15,13 @@ define kmod::blacklist(
   $ensure=present,
   $file='/etc/modprobe.d/blacklist.conf',
 ) {
-  ::kmod::generic {"blacklist ${name}":
-    ensure => $ensure,
-    type   => 'blacklist',
-    module => $name,
-    file   => $file,
+
+
+  kmod::setting { "kmod::blacklist ${title}":
+    ensure   => $ensure,
+    module   => $title,
+    file     => $file,
+    category => 'blacklist',
   }
+
 }

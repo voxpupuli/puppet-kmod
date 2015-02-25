@@ -6,37 +6,37 @@ describe 'kmod::alias', :type => :define do
   on_supported_os.each do |os, facts|
     context "on #{os}" do
       let(:facts) do
-        facts
+        facts.merge( {:augeasversion => '1.2.0'} )
       end
 
-      let(:default_params) do { :source => 'bar', :file => '/baz' } end
+      let(:default_params) do { :modulename =>'bar', :file => '/baz' } end
 
-      context 'when ensure is set to present' do
+      context 'when a file is specified' do
         let(:params) do default_params end
         it { should contain_kmod__alias('foo') }
-        it { should contain_augeas('modprobe alias foo bar').with({
-          'incl'    => '/baz',
-          'lens'    => 'Modprobe.lns',
-          'changes' => [ "set alias[. = 'foo'] foo","set alias[. = 'foo']/modulename bar" ],
-          'onlyif'  => "match alias[. = 'foo'] size == 0",
-          'require' => 'File[/baz]'
+        it { should contain_kmod__setting('kmod::alias foo') .with({
+          'ensure'    => 'present',
+          'module'    => 'foo',
+          'file'      => '/baz',
+          'category'  => 'alias',
+          'option'    => 'modulename',
+          'value'     => 'bar'
         }) }
       end
 
-      context 'when ensure is set to absent' do
-        let(:params) do
-          default_params.merge!({ :ensure => 'absent' })
-        end
+      context 'when a file is specified and an aliasname' do
+        let(:params) do default_params.merge!({ :aliasname => 'tango' }) end
         it { should contain_kmod__alias('foo') }
-        it { should contain_kmod__load('foo').with({ 'ensure' => 'absent' }) }
-        it { should contain_augeas('remove modprobe alias foo').with({
-          'incl'    => '/baz',
-          'lens'    => 'Modprobe.lns',
-          'changes' => "rm alias[. = 'foo']",
-          'onlyif'  => "match alias[. = 'foo'] size > 0",
-          'require' => 'File[/baz]'
+        it { should contain_kmod__setting('kmod::alias foo') .with({
+          'ensure'    => 'present',
+          'module'    => 'tango',
+          'file'      => '/baz',
+          'category'  => 'alias',
+          'option'    => 'modulename',
+          'value'     => 'bar'
         }) }
       end
+
     end
   end
 end
