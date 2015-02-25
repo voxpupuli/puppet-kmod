@@ -8,7 +8,7 @@ define kmod::setting(
   $category,
   $option = undef,
   $value = undef,
-  $module = $title,
+  $module = $name,
   $ensure = 'present',
 ) {
 

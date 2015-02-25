@@ -19,7 +19,7 @@ define kmod::blacklist(
 
   kmod::setting { "kmod::blacklist ${title}":
     ensure   => $ensure,
-    module   => $title,
+    module   => $name,
     file     => $file,
     category => 'blacklist',
   }

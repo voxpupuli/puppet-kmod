@@ -9,8 +9,8 @@
 define kmod::alias(
   $modulename,
   $ensure     = 'present',
-  $file       = "/etc/modprobe.d/${title}.conf",
-  $aliasname  = $title,
+  $file       = "/etc/modprobe.d/${name}.conf",
+  $aliasname  = $name,
 ) {
 
   include ::kmod

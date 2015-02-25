@@ -9,7 +9,7 @@
 define kmod::option(
   $option,
   $value,
-  $module = $title,
+  $module = $name,
   $ensure = 'present',
   $file   = undef,
 ) {
