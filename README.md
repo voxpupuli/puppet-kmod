@@ -43,9 +43,9 @@ Adds an alias to modprobe.conf, by default `/etc/modprobe.d/<name>.conf` is assu
 ```
 
 Params:
-`modulename`: Name of the module to alias
-`aliasname`: Name of the alias (defaults to the resource title)
-`file`: File to write to (see above default)
+* `modulename`: Name of the module to alias
+* `aliasname`: Name of the alias (defaults to the resource title)
+* `file`: File to write to (see above default)
 
 ### kmod::option
 
@@ -65,10 +65,10 @@ Adds an option to modprobe.conf
 ```
 
 Params:
-`option`: Name of the parameter to add
-`value`: Value of the parameter
-`module`: Name of the module (if ommited, the resource title is used)
-`file`: File to write to (defaults to `/etc/modprobe.d/<module name>.conf`)
+* `option`: Name of the parameter to add
+* `value`: Value of the parameter
+* `module`: Name of the module (if ommited, the resource title is used)
+* `file`: File to write to (defaults to `/etc/modprobe.d/<module name>.conf`)
 
 ### kmod::blacklist
 
@@ -79,7 +79,7 @@ Manages modprobe blacklist entries
 ```
 
 Params:
-`file`: File to write to, defaults to `/etc/modprobe.d/blacklist.conf`
+* `file`: File to write to, defaults to `/etc/modprobe.d/blacklist.conf`
 
 ### kmod::install
 
@@ -90,8 +90,8 @@ Manage modprobe install entries
 ```
 
 Params:
-`file`: File to write to (defaults to `/etc/modprobe.d/<module name>.conf`)
-`command`: (optional) command associated with the install, defaults to `/bin/true`
+* `file`: File to write to (defaults to `/etc/modprobe.d/<module name>.conf`)
+* `command`: (optional) command associated with the install, defaults to `/bin/true`
 
 
 
