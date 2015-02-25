@@ -15,7 +15,7 @@ It depends on Augeas with the modprobe lens.
 
 ## Usage
 
-This module has four main defined types;
+This module has five main defined types:
 
   * kmod::load
   * kmod::alias
@@ -26,7 +26,7 @@ This module has four main defined types;
 
 ### kmod::load
 
-Loads a module using modprobe and manages persistant modules in /etc/sysconfig/modules
+Loads a module using modprobe and manages persistent modules in /etc/sysconfig/modules
 
 ```puppet
   kmod::load { 'mymodule': }
