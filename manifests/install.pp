@@ -15,13 +15,16 @@
 define kmod::install(
   $ensure=present,
   $command='/bin/true',
-  $file='/etc/modprobe.d/modprobe.conf',
+  $file="/etc/modprobe.conf/${name}.conf",
 ) {
-  kmod::generic {"install ${name}":
-    ensure  => $ensure,
-    type    => 'install',
-    module  => $name,
-    command => $command,
-    file    => $file,
+
+  kmod::setting { "kmod::install ${title}":
+    ensure   => $ensure,
+    module   => $name,
+    file     => $file,
+    category => 'install',
+    option   => 'command',
+    value    => $command,
   }
+
 }

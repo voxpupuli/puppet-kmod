@@ -7,15 +7,6 @@
 [![Gemnasium](https://img.shields.io/gemnasium/camptocamp/puppet-kmod.svg)](https://gemnasium.com/camptocamp/puppet-kmod)
 [![By Camptocamp](https://img.shields.io/badge/by-camptocamp-fb7047.svg)](http://www.camptocamp.com)
 
-## Usage
-
-See inline doc inside:
-
-  * kmod::load
-  * kmod::alias
-  * kmod::install
-  * kmod::blacklist
-
 ## Description
 
 This module provides definitions to manipulate modprobe.conf (5) stanzas:
@@ -25,6 +16,88 @@ This module provides definitions to manipulate modprobe.conf (5) stanzas:
  * kmod::blacklist
 
 It depends on Augeas with the modprobe lens.
+
+## Usage
+
+This module has five main defined types:
+
+  * kmod::load
+  * kmod::alias
+  * kmod::option
+  * kmod::install
+  * kmod::blacklist
+
+
+### kmod::load
+
+Loads a module using modprobe and manages persistent modules in /etc/sysconfig/modules
+
+```puppet
+  kmod::load { 'mymodule': }
+```
+
+### kmod::alias
+
+Adds an alias to modprobe.conf, by default `/etc/modprobe.d/<name>.conf` is assumed for a filename.
+
+```puppet
+  kmod::alias { 'bond0':
+    modulename => 'bonding',
+  }
+```
+
+Params:
+* `modulename`: Name of the module to alias
+* `aliasname`: Name of the alias (defaults to the resource title)
+* `file`: File to write to (see above default)
+
+### kmod::option
+
+Adds an option to modprobe.conf
+
+```puppet
+  kmod::option { 'bond0 mode':
+    module  => 'bond0',
+    option  => 'mode',
+    value   => '1',
+  }
+
+  kmod::option { 'bond0':
+    option => 'mode',
+    value  => '1',
+  }
+```
+
+Params:
+* `option`: Name of the parameter to add
+* `value`: Value of the parameter
+* `module`: Name of the module (if ommited, the resource title is used)
+* `file`: File to write to (defaults to `/etc/modprobe.d/<module name>.conf`)
+
+### kmod::blacklist
+
+Manages modprobe blacklist entries 
+
+```puppet
+  kmod::blacklist { 'foo': }
+```
+
+Params:
+* `file`: File to write to, defaults to `/etc/modprobe.d/blacklist.conf`
+
+### kmod::install
+
+Manage modprobe install entries
+
+```puppet
+   kmod::install { 'pcspkr': }
+```
+
+Params:
+* `file`: File to write to (defaults to `/etc/modprobe.d/<module name>.conf`)
+* `command`: (optional) command associated with the install, defaults to `/bin/true`
+
+
 
 ## Contributing
 
