@@ -20,7 +20,7 @@ define kmod::alias(
     file     => $file,
     category => 'alias',
     option   => 'modulename',
-    value    => $modulename,
+    value    => $source,
   }
 
 }
