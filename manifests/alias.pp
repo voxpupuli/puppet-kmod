@@ -7,7 +7,7 @@
 #     }
 #
 define kmod::alias(
-  $modulename,
+  $source,
   $ensure     = 'present',
   $file       = "/etc/modprobe.d/${name}.conf",
   $aliasname  = $name,
