@@ -13,12 +13,13 @@ describe 'kmod::install', :type => :define do
 
       let(:params) do { :ensure => 'present', :command => '/bin/true', :file => '/etc/modprobe.d/modprobe.conf' } end
       it { should contain_kmod__install('foo') }
-      it { should contain_kmod__generic('install foo').with({
-        'ensure'  => 'present',
-        'type'    => 'install',
-        'module'  => 'foo',
-        'command' => '/bin/true',
-        'file'    => '/etc/modprobe.d/modprobe.conf'
+      it { should contain_kmod__setting('kmod::install foo').with({
+        'ensure'    => 'present',
+        'category'  => 'install',
+        'module'    => 'foo',
+        'option'    => 'command',
+        'value'     => '/bin/true',
+        'file'      => '/etc/modprobe.d/modprobe.conf'
       }) }
     end
   end
