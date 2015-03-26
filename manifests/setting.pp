@@ -18,28 +18,32 @@ define kmod::setting(
   case $ensure {
     'present': {
       if $option {
-        $augset = [
+        $changes = [
           "set ${category}[. = '${module}'] ${module}",
           "set ${category}[. = '${module}']/${option} ${value}",
         ]
       } else {
-        $augset = [
+        $changes = [
           "set ${category}[. = '${module}'] ${module}",
         ]
       }
 
       $onlyif = "match ${category}[. = '${module}'] size == 0"
 
-
-      augeas { "kmod::setting ${title} ${module}":
-        incl    => $file,
-        lens    => 'Modprobe.lns',
-        changes => $augset,
-        onlyif  => $onlyif,
-        require => File[$file],
-      }
     }
 
-    default: { err ( "unknown ensure value ${ensure}" ) }
+    'absent': {
+      $changes = "rm ${category}[. = '${module}']"
+    }
+
+    default: { fail ( "unknown ensure value ${ensure}" ) }
+  }
+
+  augeas { "kmod::setting ${title} ${module}":
+    incl    => $file,
+    lens    => 'Modprobe.lns',
+    changes => $changes,
+    onlyif  => $onlyif,
+    require => File[$file],
   }
 }
