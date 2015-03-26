@@ -9,7 +9,7 @@ describe 'kmod::alias', :type => :define do
         facts.merge( {:augeasversion => '1.2.0'} )
       end
 
-      let(:default_params) do { :modulename =>'bar', :file => '/baz' } end
+      let(:default_params) do { :source =>'bar', :file => '/baz' } end
 
       context 'when a file is specified' do
         let(:params) do default_params end
