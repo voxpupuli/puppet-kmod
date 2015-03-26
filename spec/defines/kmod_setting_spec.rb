@@ -21,7 +21,6 @@ describe 'kmod::setting', :type => :define do
           'incl'    => 'modprobe.conf',
           'lens'    => 'Modprobe.lns',
           'changes' => [ "set alias[. = 'foo'] foo", "set alias[. = 'foo']/modulename tango" ],
-          'onlyif'  => "match alias[. = 'foo'] size == 0",
           'require' => 'File[modprobe.conf]'
         })}
       end
@@ -32,7 +31,6 @@ describe 'kmod::setting', :type => :define do
           'incl'    => '/etc/modprobe.d/blacklist.conf',
           'lens'    => 'Modprobe.lns',
           'changes' => [ "set blacklist[. = 'foo'] foo" ],
-          'onlyif'  => "match blacklist[. = 'foo'] size == 0",
           'require' => 'File[/etc/modprobe.d/blacklist.conf]'
         })}
       end

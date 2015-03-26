@@ -27,9 +27,6 @@ define kmod::setting(
           "set ${category}[. = '${module}'] ${module}",
         ]
       }
-
-      $onlyif = "match ${category}[. = '${module}'] size == 0"
-
     }
 
     'absent': {
@@ -43,7 +40,6 @@ define kmod::setting(
     incl    => $file,
     lens    => 'Modprobe.lns',
     changes => $changes,
-    onlyif  => $onlyif,
     require => File[$file],
   }
 }
