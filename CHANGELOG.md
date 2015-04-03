@@ -1,3 +1,8 @@
+## 2015-04-03 - Release 2.0.0
+
+- Add kmod::option and refactored everything to use kmod::setting
+- removed obsolete generic.pp
+
 ## 2015-03-24 - Release 1.0.6
 
 - Lint
