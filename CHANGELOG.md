@@ -1,3 +1,7 @@
+## 2015-04-15 - Release 2.0.1
+
+- Fix kmod::install's file class parameter's default
+
 ## 2015-04-03 - Release 2.0.0
 
 - Add kmod::option and refactored everything to use kmod::setting
