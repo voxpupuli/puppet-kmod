@@ -1,3 +1,7 @@
+## 2015-04-18 - Release 2.0.2
+
+- Add beaker nodeset
+
 ## 2015-04-15 - Release 2.0.1
 
 - Fix kmod::install's file class parameter's default
