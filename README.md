@@ -27,6 +27,91 @@ This module has five main defined types:
   * kmod::install
   * kmod::blacklist
 
+## class kmod parameters
+
+aliases
+-------
+Hash of defined type kmod::aliases.
+
+- *Default*: undef
+
+aliases_hiera_merge
+-------------------
+Boolean to control merges of all found instances of types::aliases in Hiera.
+This is useful for specifying kmod::alias resources at different levels of the
+hierarchy and having them all included in the catalog.
+
+- *Default*: true
+
+blacklists
+----------
+Hash of defined type kmod::blacklists.
+
+- *Default*: undef
+
+blacklists_hiera_merge
+----------------------
+Boolean to control merges of all found instances of types::blacklists in Hiera.
+This is useful for specifying kmod::blacklist resources at different levels of the
+hierarchy and having them all included in the catalog.
+
+- *Default*: true
+
+installs
+--------
+Hash of defined type kmod::installs.
+
+- *Default*: undef
+
+installs_hiera_merge
+--------------------
+Boolean to control merges of all found instances of types::installs in Hiera.
+This is useful for specifying kmod::install resources at different levels of the
+hierarchy and having them all included in the catalog.
+
+- *Default*: true
+
+loads
+-----
+Hash of defined type kmod::loads.
+
+- *Default*: undef
+
+loads_hiera_merge
+-----------------
+Boolean to control merges of all found instances of types::loads in Hiera.
+This is useful for specifying kmod::load resources at different levels of the
+hierarchy and having them all included in the catalog.
+
+- *Default*: true
+
+options
+-------
+Hash of defined type kmod::options.
+
+- *Default*: undef
+
+options_hiera_merge
+-------------------
+Boolean to control merges of all found instances of types::options in Hiera.
+This is useful for specifying kmod::option resources at different levels of the
+hierarchy and having them all included in the catalog.
+
+- *Default*: true
+
+settings
+--------
+Hash of defined type kmod::settings.
+
+- *Default*: undef
+
+settings_hiera_merge
+--------------------
+Boolean to control merges of all found instances of types::settings in Hiera.
+This is useful for specifying kmod::setting resources at different levels of the
+hierarchy and having them all included in the catalog.
+
+- *Default*: true
 
 ### kmod::load
 
