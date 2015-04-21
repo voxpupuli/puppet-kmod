@@ -1,4 +1,3 @@
-#
 # == Definition: kmod::install
 #
 # Set a kernel module as installed.
@@ -12,10 +11,10 @@
 #
 #   kmod::install { 'pcspkr': }
 #
-define kmod::install(
-  $ensure=present,
-  $command='/bin/true',
-  $file="/etc/modprobe.d/${name}.conf",
+define kmod::install (
+  $ensure  = 'present',
+  $command = '/bin/true',
+  $file    = "/etc/modprobe.d/${name}.conf",
 ) {
 
   kmod::setting { "kmod::install ${title}":
@@ -26,5 +25,4 @@ define kmod::install(
     option   => 'command',
     value    => $command,
   }
-
 }

@@ -57,9 +57,9 @@ Adds an option to modprobe.conf
 
 ```puppet
   kmod::option { 'bond0 mode':
-    module  => 'bond0',
-    option  => 'mode',
-    value   => '1',
+    module => 'bond0',
+    option => 'mode',
+    value  => '1',
   }
 
   kmod::option { 'bond0':

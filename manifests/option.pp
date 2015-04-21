@@ -1,4 +1,4 @@
-# = Define: kmod::alias
+# == Define: kmod::alias
 #
 # == Example
 #
@@ -6,7 +6,7 @@
 #       option => 'bonding',
 #     }
 #
-define kmod::option(
+define kmod::option (
   $option,
   $value,
   $module = $name,
@@ -21,7 +21,6 @@ define kmod::option(
     default => $file,
   }
 
-
   kmod::setting { "kmod::option ${title}":
     ensure   => $ensure,
     module   => $module,
@@ -30,6 +29,4 @@ define kmod::option(
     option   => $option,
     value    => $value,
   }
-
 }
-

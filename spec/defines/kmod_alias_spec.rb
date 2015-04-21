@@ -13,7 +13,9 @@ describe 'kmod::alias', :type => :define do
 
       context 'when a file is specified' do
         let(:params) do default_params end
+
         it { should contain_kmod__alias('foo') }
+
         it { should contain_kmod__setting('kmod::alias foo') .with({
           'ensure'    => 'present',
           'module'    => 'foo',
@@ -26,7 +28,9 @@ describe 'kmod::alias', :type => :define do
 
       context 'when a file is specified and an aliasname' do
         let(:params) do default_params.merge!({ :aliasname => 'tango' }) end
+
         it { should contain_kmod__alias('foo') }
+
         it { should contain_kmod__setting('kmod::alias foo') .with({
           'ensure'    => 'present',
           'module'    => 'tango',
@@ -36,7 +40,6 @@ describe 'kmod::alias', :type => :define do
           'value'     => 'bar'
         }) }
       end
-
     end
   end
 end

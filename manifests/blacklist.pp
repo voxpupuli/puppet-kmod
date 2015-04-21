@@ -1,4 +1,3 @@
-#
 # == Definition: kmod::blacklist
 #
 # Set a kernel module as blacklisted.
@@ -11,11 +10,10 @@
 #
 #   kmod::blacklist { 'pcspkr': }
 #
-define kmod::blacklist(
-  $ensure=present,
-  $file='/etc/modprobe.d/blacklist.conf',
+define kmod::blacklist (
+  $ensure = 'present',
+  $file   = '/etc/modprobe.d/blacklist.conf',
 ) {
-
 
   kmod::setting { "kmod::blacklist ${title}":
     ensure   => $ensure,
@@ -23,5 +21,4 @@ define kmod::blacklist(
     file     => $file,
     category => 'blacklist',
   }
-
 }

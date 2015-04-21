@@ -11,7 +11,9 @@ describe 'kmod::load', :type => :define do
 
       context 'with ensure set to present' do
         let(:params) do { :ensure => 'present', :file => '/foo/bar' } end
+
         it { should contain_kmod__load('foo') }
+
         it { should contain_exec('modprobe foo').with({'unless' => "egrep -q '^foo ' /proc/modules"}) }
 
         case facts[:osfamily]
@@ -32,7 +34,9 @@ describe 'kmod::load', :type => :define do
 
       context 'with ensure set to absent' do
         let(:params) do { :ensure => 'absent', :file => '/foo/bar' } end
+
         it { should contain_kmod__load('foo') }
+
         it { should contain_exec('modprobe -r foo').with({ 'onlyif' => "egrep -q '^foo ' /proc/modules" }) }
 
         case facts[:osfamily]

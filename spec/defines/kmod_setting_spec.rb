@@ -12,11 +12,14 @@ describe 'kmod::setting', :type => :define do
       end
 
       let(:default_params) do { :file => 'modprobe.conf'  } end
+
       let(:params) do default_params end
 
       context 'add an alias' do
         let(:params) do default_params.merge({ :category => 'alias', :option => 'modulename', :value => 'tango' }) end
+
         it { should contain_kmod__setting('foo')}
+
         it { should contain_augeas('kmod::setting foo foo').with({
           'incl'    => 'modprobe.conf',
           'lens'    => 'Modprobe.lns',
@@ -24,9 +27,12 @@ describe 'kmod::setting', :type => :define do
           'require' => 'File[modprobe.conf]'
         })}
       end
+
       context 'add a blacklist' do
         let(:params) do { :file => '/etc/modprobe.d/blacklist.conf', :category => 'blacklist'  } end
+
         it { should contain_kmod__setting('foo')}
+
         it { should contain_augeas('kmod::setting foo foo').with({
           'incl'    => '/etc/modprobe.d/blacklist.conf',
           'lens'    => 'Modprobe.lns',
@@ -34,7 +40,6 @@ describe 'kmod::setting', :type => :define do
           'require' => 'File[/etc/modprobe.d/blacklist.conf]'
         })}
       end
-
     end
   end
 end
