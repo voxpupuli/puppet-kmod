@@ -76,7 +76,9 @@ Params:
 
 ### kmod::blacklist
 
-Manages modprobe blacklist entries 
+Manages modprobe blacklist entries. Blacklist entries prevents module aliases from being used, 
+but would not prevent the module from being loaded.
+To prevent a module from being loaded use `kmod::install`
 
 ```puppet
   kmod::blacklist { 'foo': }
@@ -91,6 +93,11 @@ Manage modprobe install entries
 
 ```puppet
    kmod::install { 'pcspkr': }
+```
+
+If you want to ensure that module can't be loaded at all you can do the following:
+```puppet
+   kmod::install { 'dccp': command => '/bin/false' }
 ```
 
 Params:
@@ -110,7 +117,7 @@ with [puppet-lint](https://github.com/camptocamp/puppet-kmod/issues) to follow t
 
 ## License
 
-Copyright (c) 2013 <mailto:puppet@camptocamp.com> All rights reserved.
+Copyright (c) 2015 <mailto:puppet@camptocamp.com> All rights reserved.
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
