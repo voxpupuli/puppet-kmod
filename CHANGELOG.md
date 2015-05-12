@@ -1,3 +1,7 @@
+## 2015-05-12 - Release 2.0.4
+
+Don't pin beaker
+
 ## 2015-04-27 - Release 2.0.3
 
 Add nodeset ubuntu-12.04-x86_64-openstack
