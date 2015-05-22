@@ -1,4 +1,3 @@
-#
 # == Definition: kmod::load
 #
 # Manage a kernel module in /etc/modules.
@@ -11,9 +10,9 @@
 #
 #   kmod::load { 'sha256': }
 #
-define kmod::load(
-  $ensure=present,
-  $file='/etc/modules',
+define kmod::load (
+  $ensure = 'present',
+  $file   = '/etc/modules',
 ) {
 
   case $ensure {
@@ -25,7 +24,6 @@ define kmod::load(
         unless => "egrep -q '^${name} ' /proc/modules",
       }
     }
-
     'absent': {
       $changes = "rm '${name}'"
 
@@ -34,8 +32,9 @@ define kmod::load(
         onlyif => "egrep -q '^${name} ' /proc/modules",
       }
     }
-
-    default: { fail "unknown ensure value ${ensure}" }
+    default: {
+      fail("unknown ensure value ${ensure}")
+    }
   }
 
   case $::osfamily {
@@ -54,7 +53,7 @@ define kmod::load(
       }
     }
     default: {
-      fail "Unknown OS family ${::osfamily}"
+      fail("Unknown OS family ${::osfamily}")
     }
   }
 }

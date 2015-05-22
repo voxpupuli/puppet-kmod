@@ -1,4 +1,4 @@
-# = Define: kmod::alias
+# == Define: kmod::alias
 #
 # == Example
 #
@@ -6,7 +6,7 @@
 #       alias => 'bonding',
 #     }
 #
-define kmod::alias(
+define kmod::alias (
   $source,
   $ensure     = 'present',
   $file       = "/etc/modprobe.d/${name}.conf",
@@ -22,5 +22,4 @@ define kmod::alias(
     option   => 'modulename',
     value    => $source,
   }
-
 }

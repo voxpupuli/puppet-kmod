@@ -1,20 +1,18 @@
-# = Define: kmod::setting
+# == Define: kmod::setting
 #
-# == Example
-#
-#
-define kmod::setting(
+define kmod::setting (
   $file,
   $category,
   $option = undef,
-  $value = undef,
+  $value  = undef,
   $module = $name,
   $ensure = 'present',
 ) {
 
   include ::kmod
 
-  ensure_resource('file', $file, { 'ensure' => 'file'} )
+  ensure_resource('file', $file, { 'ensure' => 'file' } )
+
   case $ensure {
     'present': {
       if $option {
@@ -28,12 +26,12 @@ define kmod::setting(
         ]
       }
     }
-
     'absent': {
       $changes = "rm ${category}[. = '${module}']"
     }
-
-    default: { fail ( "unknown ensure value ${ensure}" ) }
+    default: {
+      fail("unknown ensure value ${ensure}")
+    }
   }
 
   augeas { "kmod::setting ${title} ${module}":
