@@ -1,6 +1,6 @@
 {
   "name": "camptocamp-kmod",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "author": "camptocamp",
   "summary": "Manage Linux kernel modules with Puppet",
   "license": "Apache-2.0",
