@@ -7,6 +7,10 @@
 #
 class kmod {
 
+  if $::augeasversion == undef {
+    fail('gem ruby-augeas required')  
+  }
+
   if versioncmp($::augeasversion, '0.9.0') < 0 {
     fail('Augeas 0.10.0 or higher required')
   }
