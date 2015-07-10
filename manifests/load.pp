@@ -18,7 +18,15 @@ define kmod::load(
 
   case $ensure {
     'present': {
-      $changes = "clear '${name}'"
+      case $::osfamily {
+        'Debian': {
+          $changes = "clear '${name}'"
+        }
+        'Suse': {
+          $changes = "set MODULES_LOADED_ON_BOOT/value[.='${name}'] '${name}'"
+        }
+        default: { }
+      }
 
       exec { "modprobe ${name}":
         path   => '/bin:/sbin:/usr/bin:/usr/sbin',
@@ -27,7 +35,15 @@ define kmod::load(
     }
 
     'absent': {
-      $changes = "rm '${name}'"
+      case $::osfamily {
+        'Debian': {
+          $changes = "rm '${name}'"
+        }
+        'Suse': {
+          $changes = "rm MODULES_LOADED_ON_BOOT/value[.='${name}']"
+        }
+        default: { }
+      }
 
       exec { "modprobe -r ${name}":
         path   => '/bin:/sbin:/usr/bin:/usr/sbin',
@@ -35,7 +51,7 @@ define kmod::load(
       }
     }
 
-    default: { fail "unknown ensure value ${ensure}" }
+    default: { fail "${module_name}: unknown ensure value ${ensure}" }
   }
 
   case $::osfamily {
@@ -53,8 +69,19 @@ define kmod::load(
         content => template('kmod/redhat.modprobe.erb'),
       }
     }
+    'Suse': {
+      $kernelfile = $file ? {
+        '/etc/modules' => '/etc/sysconfig/kernel',
+        default        => $file,
+      }
+      augeas { "sysconfig_kernel_MODULES_LOADED_ON_BOOT_${name}":
+        lens    => 'Shellvars_list.lns',
+        incl    => $kernelfile,
+        changes => $changes,
+      }
+    }
     default: {
-      fail "Unknown OS family ${::osfamily}"
+      fail "${module_name}: Unknown OS family ${::osfamily}"
     }
   }
 }
