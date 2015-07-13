@@ -3,14 +3,14 @@ require 'spec_helper'
 describe 'kmod', :type => :class do
 
   on_supported_os.each do |os, facts|
-  context "on ${os} with augeas 0.8.9" do
-    let(:facts) do facts.merge({:augeasversion => '0.8.9'}) end
-    it do
-      expect {
-        should compile
-      }.to raise_error(/Augeas 0.10.0 or higher required/)
+    context "on #{os} with augeas 0.8.9" do
+      let(:facts) do facts.merge({:augeasversion => '0.8.9'}) end
+      it do
+        expect {
+          should compile
+        }.to raise_error(/Augeas 0.10.0 or higher required/)
+      end
     end
-  end
     context "on #{os}" do
       let(:facts) do
         facts.merge(  { :augeasversion => '1.2.0' } )
