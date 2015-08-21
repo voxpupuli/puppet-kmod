@@ -1,3 +1,7 @@
+## 2015-08-21 - Release 2.0.11
+
+Use docker for acceptance tests
+
 ## 2015-06-26 - Release 2.0.10
 
 Fix strict_variables activation with rspec-puppet 2.2
