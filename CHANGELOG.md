@@ -1,3 +1,7 @@
+## 2015-08-27 - Release 2.1.0
+
+Add minimal SuSE support
+
 ## 2015-08-21 - Release 2.0.11
 
 Use docker for acceptance tests
