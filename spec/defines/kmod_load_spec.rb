@@ -21,6 +21,12 @@ describe 'kmod::load', :type => :define do
             'lens'    => 'Modules.lns',
             'changes' => "clear 'foo'"
           }) }
+        when 'Suse'
+          it { should contain_augeas('sysconfig_kernel_MODULES_LOADED_ON_BOOT_foo').with({
+            'incl'    => '/foo/bar',
+            'lens'    => 'Shellvars_list.lns',
+            'changes' => "set MODULES_LOADED_ON_BOOT/value[.='foo'] 'foo'"
+          }) }
         when 'RedHat'
           it { should contain_file('/etc/sysconfig/modules/foo.modules').with({
             'ensure'  => 'present',
@@ -42,6 +48,12 @@ describe 'kmod::load', :type => :define do
             'lens'    => 'Modules.lns',
             'changes' => "rm 'foo'"
           })}
+        when 'Suse'
+          it { should contain_augeas('sysconfig_kernel_MODULES_LOADED_ON_BOOT_foo').with({
+            'incl'    => '/foo/bar',
+            'lens'    => 'Shellvars_list.lns',
+            'changes' => "rm MODULES_LOADED_ON_BOOT/value[.='foo']"
+          }) }
         when 'RedHat'
           it { should contain_file('/etc/sysconfig/modules/foo.modules').with({
             'ensure'  => 'absent',
