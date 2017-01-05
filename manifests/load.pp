@@ -80,6 +80,13 @@ define kmod::load(
         changes => $changes,
       }
     }
+    'Archlinux': {
+      file { "/etc/modules-load.d/${name}.conf":
+        ensure  => $ensure,
+        mode    => '0644',
+        content => "${name}\n",
+      }
+    }
     default: {
       fail "${module_name}: Unknown OS family ${::osfamily}"
     }
