@@ -31,6 +31,7 @@ define kmod::load(
       exec { "modprobe ${name}":
         path   => '/bin:/sbin:/usr/bin:/usr/sbin',
         unless => "egrep -q '^${name} ' /proc/modules",
+        path   => '/sbin/:/usr/sbin/:/usr/bin/:/bin/',
       }
     }
 
@@ -48,6 +49,7 @@ define kmod::load(
       exec { "modprobe -r ${name}":
         path   => '/bin:/sbin:/usr/bin:/usr/sbin',
         onlyif => "egrep -q '^${name} ' /proc/modules",
+        path   => '/sbin/:/usr/sbin/:/usr/bin/:/bin/',
       }
     }
 
