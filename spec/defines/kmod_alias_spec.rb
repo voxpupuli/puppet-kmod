@@ -37,6 +37,14 @@ describe 'kmod::alias', :type => :define do
         }) }
       end
 
+      context 'when ensure absent is specified' do
+        let(:params) do default_params.merge!({ :ensure => 'absent' }) end
+        it { should contain_kmod__alias('foo') }
+        it { should contain_kmod__setting('kmod::alias foo') .with({
+          'ensure'    => 'absent',
+        }) }
+      end
+
     end
   end
 end

@@ -16,6 +16,7 @@ define kmod::alias(
   include ::kmod
 
   kmod::setting { "kmod::alias ${title}":
+    ensure   => $ensure,
     module   => $aliasname,
     file     => $file,
     category => 'alias',
