@@ -1,3 +1,8 @@
+## 2017-08-09 - Release 2.2.0
+
+* Add ArchLinux support [GH #39, #40]
+* Fix ensure=absent in alias [GH #42]
+
 ## 2015-08-27 - Release 2.1.0
 
 Add minimal SuSE support
