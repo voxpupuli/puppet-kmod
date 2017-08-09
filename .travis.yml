@@ -29,4 +29,4 @@ deploy:
     # all_branches is required to use tags
     all_branches: true
     # Only publish if our main Ruby target builds
-    rvm: 2.1.10
+    rvm: 2.1.9
