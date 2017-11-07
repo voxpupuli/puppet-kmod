@@ -30,7 +30,7 @@ define kmod::setting(
     }
 
     'absent': {
-      $changes = "rm ${category}[. = '${module}']"
+      $changes = "rm ${category}[. = '${module}']/${option} ${value}"
     }
 
     default: { fail ( "unknown ensure value ${ensure}" ) }
