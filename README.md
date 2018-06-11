@@ -4,7 +4,6 @@
 [![Puppet Forge Downloads](http://img.shields.io/puppetforge/dt/camptocamp/kmod.svg)](https://forge.puppetlabs.com/camptocamp/kmod)
 [![Build Status](https://img.shields.io/travis/camptocamp/puppet-kmod/master.svg)](https://travis-ci.org/camptocamp/puppet-kmod)
 [![Puppet Forge Endorsement](https://img.shields.io/puppetforge/e/camptocamp/kmod.svg)](https://forge.puppetlabs.com/camptocamp/kmod)
-[![Gemnasium](https://img.shields.io/gemnasium/camptocamp/puppet-kmod.svg)](https://gemnasium.com/camptocamp/puppet-kmod)
 [![By Camptocamp](https://img.shields.io/badge/by-camptocamp-fb7047.svg)](http://www.camptocamp.com)
 
 ## Description
@@ -42,7 +41,7 @@ Adds an alias to modprobe.conf, by default `/etc/modprobe.d/<name>.conf` is assu
 
 ```puppet
   kmod::alias { 'bond0':
-    modulename => 'bonding',
+    aliasname => 'bonding',
   }
 ```
 
@@ -76,7 +75,7 @@ Params:
 
 ### kmod::blacklist
 
-Manages modprobe blacklist entries. Blacklist entries prevents module aliases from being used, 
+Manages modprobe blacklist entries. Blacklist entries prevents module aliases from being used,
 but would not prevent the module from being loaded.
 To prevent a module from being loaded use `kmod::install`
 
@@ -104,7 +103,46 @@ Params:
 * `file`: File to write to (defaults to `/etc/modprobe.d/<module name>.conf`)
 * `command`: (optional) command associated with the install, defaults to `/bin/true`
 
+## Using the module with hiera
+The module makes available lists for every defined type that will create those
+defined types if defined as class parameters. The parameters are:
+* kmod::list_of_blacklists:
+* kmod::list_of_aliases:
+* kmod::list_of_installs:
+* kmod::list_of_loads:
+* kmod::list_of_options:
 
+Example usage:
+```
+---
+kmod::list_of_blacklists:
+  'foo01': {}
+  'foo02': {}
+  'foo03': {}
+kmod::list_of_aliases:
+  'foo01':
+    source: 'squashfs'
+    aliasname: 'squash01'
+  'foo02':
+    source: 'squashfs'
+    aliasname: 'squash02'
+kmod::list_of_installs:
+  'dccp':
+    command: '/bin/false'
+  'blah':
+    command: '/bin/true'
+kmod::list_of_loads:
+  'cramfs': {}
+  'vfat': {}
+kmod::list_of_options:
+  'bond0 mode':
+    module: 'bond0'
+    option: 'mode'
+    value: '1'
+  'bond0':
+    option: 'mode'
+    value: '1'
+```
 
 ## Contributing
 
