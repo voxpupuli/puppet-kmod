@@ -14,25 +14,39 @@ describe 'kmod::load', :type => :define do
         it { should contain_kmod__load('foo') }
         it { should contain_exec('modprobe foo').with({'unless' => "egrep -q '^foo ' /proc/modules"}) }
 
-        case facts[:osfamily]
-        when 'Debian'
-          it { should contain_augeas('Manage foo in /foo/bar').with({
-            'incl'    => '/foo/bar',
-            'lens'    => 'Modules.lns',
-            'changes' => "clear 'foo'"
+        context 'when on systemd' do
+          let(:facts) do
+            facts.merge( { :service_provider => 'systemd' } )
+          end
+
+          it { should contain_file('/etc/modules-load.d/foo.conf').with({
+            'ensure' => 'present',
+            'mode' => '0644',
+            'content' => "# This file is managed by the puppet kmod module.\nfoo\n"
           }) }
-        when 'Suse'
-          it { should contain_augeas('sysconfig_kernel_MODULES_LOADED_ON_BOOT_foo').with({
-            'incl'    => '/foo/bar',
-            'lens'    => 'Shellvars_list.lns',
-            'changes' => "set MODULES_LOADED_ON_BOOT/value[.='foo'] 'foo'"
-          }) }
-        when 'RedHat'
-          it { should contain_file('/etc/sysconfig/modules/foo.modules').with({
-            'ensure'  => 'present',
-            'mode'    => '0755',
-            'content' => /exec \/sbin\/modprobe foo > \/dev\/null 2>&1/
-          })}
+        end
+
+        context 'when not on systemd' do
+          case facts[:osfamily]
+          when 'Debian'
+            it { should contain_augeas('Manage foo in /foo/bar').with({
+              'incl'    => '/foo/bar',
+              'lens'    => 'Modules.lns',
+              'changes' => "clear 'foo'"
+            }) }
+          when 'Suse'
+            it { should contain_augeas('sysconfig_kernel_MODULES_LOADED_ON_BOOT_foo').with({
+              'incl'    => '/foo/bar',
+              'lens'    => 'Shellvars_list.lns',
+              'changes' => "set MODULES_LOADED_ON_BOOT/value[.='foo'] 'foo'"
+            }) }
+          when 'RedHat'
+            it { should contain_file('/etc/sysconfig/modules/foo.modules').with({
+              'ensure'  => 'present',
+              'mode'    => '0755',
+              'content' => /exec \/sbin\/modprobe foo > \/dev\/null 2>&1/
+            })}
+          end
         end
       end
 
@@ -41,25 +55,39 @@ describe 'kmod::load', :type => :define do
         it { should contain_kmod__load('foo') }
         it { should contain_exec('modprobe -r foo').with({ 'onlyif' => "egrep -q '^foo ' /proc/modules" }) }
 
-        case facts[:osfamily]
-        when 'Debian'
-          it { should contain_augeas('Manage foo in /foo/bar').with({
-            'incl'    => '/foo/bar',
-            'lens'    => 'Modules.lns',
-            'changes' => "rm 'foo'"
-          })}
-        when 'Suse'
-          it { should contain_augeas('sysconfig_kernel_MODULES_LOADED_ON_BOOT_foo').with({
-            'incl'    => '/foo/bar',
-            'lens'    => 'Shellvars_list.lns',
-            'changes' => "rm MODULES_LOADED_ON_BOOT/value[.='foo']"
+        context 'when on systemd' do
+          let(:facts) do
+            facts.merge( { :service_provider => 'systemd' } )
+          end
+
+          it { should contain_file('/etc/modules-load.d/foo.conf').with({
+            'ensure' => 'absent',
+            'mode' => '0644',
+            'content' => "# This file is managed by the puppet kmod module.\nfoo\n"
           }) }
-        when 'RedHat'
-          it { should contain_file('/etc/sysconfig/modules/foo.modules').with({
-            'ensure'  => 'absent',
-            'mode'    => '0755',
-            'content' => /exec \/sbin\/modprobe foo > \/dev\/null 2>&1/
-          })}
+        end
+
+        context 'when not on systemd' do
+          case facts[:osfamily]
+          when 'Debian'
+            it { should contain_augeas('Manage foo in /foo/bar').with({
+              'incl'    => '/foo/bar',
+              'lens'    => 'Modules.lns',
+              'changes' => "rm 'foo'"
+            })}
+          when 'Suse'
+            it { should contain_augeas('sysconfig_kernel_MODULES_LOADED_ON_BOOT_foo').with({
+              'incl'    => '/foo/bar',
+              'lens'    => 'Shellvars_list.lns',
+              'changes' => "rm MODULES_LOADED_ON_BOOT/value[.='foo']"
+            }) }
+          when 'RedHat'
+            it { should contain_file('/etc/sysconfig/modules/foo.modules').with({
+              'ensure'  => 'absent',
+              'mode'    => '0755',
+              'content' => /exec \/sbin\/modprobe foo > \/dev\/null 2>&1/
+            })}
+          end
         end
       end
     end

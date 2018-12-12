@@ -5,7 +5,8 @@
 #
 # Parameters:
 # - *ensure*: present/absent;
-# - *file*: optionally, set the file where the stanza is written.
+# - *file*: optionally, set the file where the stanza is written. Not
+#           used for systems running systemd.
 #
 # Example usage:
 #
@@ -54,41 +55,42 @@ define kmod::load(
     default: { fail "${module_name}: unknown ensure value ${ensure}" }
   }
 
-  case $::osfamily {
-    'Debian': {
-      augeas {"Manage ${name} in ${file}":
-        incl    => $file,
-        lens    => 'Modules.lns',
-        changes => $changes,
-      }
+  if $facts['service_provider'] == 'systemd' {
+    file { "/etc/modules-load.d/${name}.conf":
+      ensure  => $ensure,
+      mode    => '0644',
+      content => "# This file is managed by the puppet kmod module.\n${name}\n",
     }
-    'RedHat': {
-      file { "/etc/sysconfig/modules/${name}.modules":
-        ensure  => $ensure,
-        mode    => '0755',
-        content => template('kmod/redhat.modprobe.erb'),
+  } else {
+    case $::osfamily {
+      'Debian': {
+        augeas {"Manage ${name} in ${file}":
+          incl    => $file,
+          lens    => 'Modules.lns',
+          changes => $changes,
+        }
       }
-    }
-    'Suse': {
-      $kernelfile = $file ? {
-        '/etc/modules' => '/etc/sysconfig/kernel',
-        default        => $file,
+      'RedHat': {
+        file { "/etc/sysconfig/modules/${name}.modules":
+          ensure  => $ensure,
+          mode    => '0755',
+          content => template('kmod/redhat.modprobe.erb'),
+        }
       }
-      augeas { "sysconfig_kernel_MODULES_LOADED_ON_BOOT_${name}":
-        lens    => 'Shellvars_list.lns',
-        incl    => $kernelfile,
-        changes => $changes,
+      'Suse': {
+        $kernelfile = $file ? {
+          '/etc/modules' => '/etc/sysconfig/kernel',
+          default        => $file,
+        }
+        augeas { "sysconfig_kernel_MODULES_LOADED_ON_BOOT_${name}":
+          lens    => 'Shellvars_list.lns',
+          incl    => $kernelfile,
+          changes => $changes,
+        }
       }
-    }
-    'Archlinux': {
-      file { "/etc/modules-load.d/${name}.conf":
-        ensure  => $ensure,
-        mode    => '0644',
-        content => "${name}\n",
+      default: {
+        fail "${module_name}: Unknown OS family ${::osfamily}"
       }
-    }
-    default: {
-      fail "${module_name}: Unknown OS family ${::osfamily}"
     }
   }
 }
