@@ -1,3 +1,9 @@
+## 2019-03-01 - Release 2.3.0
+
+* Add hiera class parameters and update documentation [GH #47]
+* kmod::load: load modules the systemd way if the system runs systemd [GH #48]
+* Adapt tests for Puppet 6
+
 ## 2017-08-09 - Release 2.2.0
 
 * Add ArchLinux support [GH #39, #40]
