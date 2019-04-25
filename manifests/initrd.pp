@@ -6,7 +6,7 @@
 #
 class kmod::initrd(Optional[String] $cmd = $facts.kmod_update_initrd_cmd){
   if defined($cmd) {
-    exec { 'Update initramfs image.':
+    exec { "${module_name}: Update initramfs image.":
       command     => $cmd,
       refreshonly => true,
       subscribe   => [
