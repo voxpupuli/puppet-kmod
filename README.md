@@ -18,14 +18,16 @@ It depends on Augeas with the modprobe lens.
 
 ## Usage
 
-This module has five main defined types:
+This module has five main defined types and one class:
 
-  * kmod::load
-  * kmod::alias
-  * kmod::option
-  * kmod::install
-  * kmod::blacklist
-
+  * *Types*:
+    * kmod::load
+    * kmod::alias
+    * kmod::option
+    * kmod::install
+    * kmod::blacklist
+  * *Class*:
+    * kmod::initrd
 
 ### kmod::load
 
@@ -102,6 +104,14 @@ If you want to ensure that module can't be loaded at all you can do the followin
 Params:
 * `file`: File to write to (defaults to `/etc/modprobe.d/<module name>.conf`)
 * `command`: (optional) command associated with the install, defaults to `/bin/true`
+
+### kmod::initrd
+
+Optionally regenerates the initramfs image after modifying kernel module configuration.
+
+To enable, set `kmod::update_initrd: true` in hiera or by class parameter.
+
+This invokes either `dracut -H -f` or `update-initramfs -u`, whichever is available.
 
 ## Using the module with hiera
 The module makes available lists for every defined type that will create those

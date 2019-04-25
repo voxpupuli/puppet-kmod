@@ -6,11 +6,12 @@
 #
 #
 class kmod (
-  Optional[Hash] $list_of_aliases    = {},
-  Optional[Hash] $list_of_blacklists = {},
-  Optional[Hash] $list_of_installs   = {},
-  Optional[Hash] $list_of_loads      = {},
-  Optional[Hash] $list_of_options    = {},
+  Optional[Hash]    $list_of_aliases    = {},
+  Optional[Hash]    $list_of_blacklists = {},
+  Optional[Hash]    $list_of_installs   = {},
+  Optional[Hash]    $list_of_loads      = {},
+  Optional[Hash]    $list_of_options    = {},
+  Optional[Boolean] $update_initrd      = false,
 ){
   if versioncmp($::augeasversion, '0.9.0') < 0 {
     fail('Augeas 0.10.0 or higher required')
@@ -48,5 +49,8 @@ class kmod (
     kmod::option { $name:
       * => $data,
     }
+  }
+  if $update_initrd {
+    include ::kmod::initrd
   }
 }
