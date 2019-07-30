@@ -1,3 +1,7 @@
+## 2019-07-30 - Release 2.3.1
+
+* Allow stdlib 6
+
 ## 2019-03-01 - Release 2.3.0
 
 * Add hiera class parameters and update documentation [GH #47]
