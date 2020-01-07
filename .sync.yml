@@ -1,3 +1,10 @@
 ---
 .travis.yml:
-  forge_password: "QvaBWqv7ZaB34BzONHPxZy+1OW+eBP4dZmhDobAVFD20kOP4O4QHdCe9kS3y3JRXrNW3wuiuegNzoKb+JvqQrZPQF3Ea0DO4uCPVrnVbrnmGC0p7v2VDA1tsb2snnSMa5mC6+3wYMwS27zRSQ7vN3AwDKMdp/jcPbTEpnv/+314="
+  user: camptocamp
+  secure: "QvaBWqv7ZaB34BzONHPxZy+1OW+eBP4dZmhDobAVFD20kOP4O4QHdCe9kS3y3JRXrNW3wuiuegNzoKb+JvqQrZPQF3Ea0DO4uCPVrnVbrnmGC0p7v2VDA1tsb2snnSMa5mC6+3wYMwS27zRSQ7vN3AwDKMdp/jcPbTEpnv/+314="
+  branches:
+    - master
+    - /^\d/
+  deploy_to_forge:
+    enabled: true
+    tag_regex: "^\\d"
