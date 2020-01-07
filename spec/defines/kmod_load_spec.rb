@@ -52,7 +52,7 @@ describe 'kmod::load', type: :define do
               is_expected.to contain_file('/etc/sysconfig/modules/foo.modules')
                 .with('ensure' => 'present',
                       'mode'    => '0755',
-                      'content' => /exec \/sbin\/modprobe foo > \/dev\/null 2>&1/)
+                      'content' => %r{exec /sbin/modprobe foo > /dev/null 2>&1})
             }
           end
         end
@@ -101,7 +101,7 @@ describe 'kmod::load', type: :define do
               is_expected.to contain_file('/etc/sysconfig/modules/foo.modules')
                 .with('ensure' => 'absent',
                       'mode'    => '0755',
-                      'content' => /exec \/sbin\/modprobe foo > \/dev\/null 2>&1/)
+                      'content' => %r{exec /sbin/modprobe foo > /dev/null 2>&1})
             }
           end
         end
