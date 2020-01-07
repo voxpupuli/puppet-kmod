@@ -1,50 +1,55 @@
 require 'spec_helper'
 
-describe 'kmod::alias', :type => :define do
+describe 'kmod::alias', type: :define do
   let(:title) { 'foo' }
 
   on_supported_os.each do |os, facts|
     context "on #{os}" do
       let(:facts) do
-        facts.merge( {:augeasversion => '1.2.0'} )
+        facts.merge(augeasversion: '1.2.0')
       end
 
-      let(:default_params) do { :source =>'bar', :file => '/baz' } end
+      let(:default_params) { { source: 'bar', file: '/baz' } }
 
       context 'when a file is specified' do
-        let(:params) do default_params end
-        it { should contain_kmod__alias('foo') }
-        it { should contain_kmod__setting('kmod::alias foo') .with({
-          'ensure'    => 'present',
-          'module'    => 'foo',
-          'file'      => '/baz',
-          'category'  => 'alias',
-          'option'    => 'modulename',
-          'value'     => 'bar'
-        }) }
+        let(:params) { default_params }
+
+        it { is_expected.to contain_kmod__alias('foo') }
+        it {
+          is_expected.to contain_kmod__setting('kmod::alias foo')
+            .with('ensure'    => 'present',
+                  'module'    => 'foo',
+                  'file'      => '/baz',
+                  'category'  => 'alias',
+                  'option'    => 'modulename',
+                  'value'     => 'bar')
+        }
       end
 
       context 'when a file is specified and an aliasname' do
-        let(:params) do default_params.merge!({ :aliasname => 'tango' }) end
-        it { should contain_kmod__alias('foo') }
-        it { should contain_kmod__setting('kmod::alias foo') .with({
-          'ensure'    => 'present',
-          'module'    => 'tango',
-          'file'      => '/baz',
-          'category'  => 'alias',
-          'option'    => 'modulename',
-          'value'     => 'bar'
-        }) }
+        let(:params) { default_params.merge!(aliasname: 'tango') }
+
+        it { is_expected.to contain_kmod__alias('foo') }
+        it {
+          is_expected.to contain_kmod__setting('kmod::alias foo')
+            .with('ensure'    => 'present',
+                  'module'    => 'tango',
+                  'file'      => '/baz',
+                  'category'  => 'alias',
+                  'option'    => 'modulename',
+                  'value'     => 'bar')
+        }
       end
 
       context 'when ensure absent is specified' do
-        let(:params) do default_params.merge!({ :ensure => 'absent' }) end
-        it { should contain_kmod__alias('foo') }
-        it { should contain_kmod__setting('kmod::alias foo') .with({
-          'ensure'    => 'absent',
-        }) }
-      end
+        let(:params) { default_params.merge!(ensure: 'absent') }
 
+        it { is_expected.to contain_kmod__alias('foo') }
+        it {
+          is_expected.to contain_kmod__setting('kmod::alias foo')
+            .with('ensure'    => 'absent')
+        }
+      end
     end
   end
 end
