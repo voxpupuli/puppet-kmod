@@ -7,7 +7,6 @@
   "source": "https://github.com/camptocamp/puppet-kmod",
   "project_page": "https://github.com/camptocamp/puppet-kmod",
   "issues_url": "https://github.com/camptocamp/puppet-kmod/issues",
-  "description": "Manage Linux kernel modules with Puppet",
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
@@ -45,5 +44,15 @@
         "7"
       ]
     }
-  ]
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 4.10.0 < 7.0.0"
+    }
+  ],
+  "description": "Manage Linux kernel modules with Puppet",
+  "pdk-version": "1.14.1",
+  "template-url": "pdk-default#1.14.1",
+  "template-ref": "1.14.1-0-g0b5b39b"
 }
