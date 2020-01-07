@@ -1,3 +1,8 @@
+## 2020-01-07 - Release 2.4.0
+
+* Remove augeasversion check [GH #53]
+* Convert to PDK [GH #54]
+
 ## 2019-07-30 - Release 2.3.1
 
 * Allow stdlib 6
