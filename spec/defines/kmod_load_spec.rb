@@ -6,7 +6,12 @@ describe 'kmod::load', type: :define do
   on_supported_os.each do |os, facts|
     context "on #{os}" do
       let(:facts) do
-        facts.merge(augeasversion: '1.2.0')
+        data = if facts[:os]['name'] == 'Archlinux'
+                 { augeasversion: '1.2.0', service_provider: 'systemd' }
+               else
+                 { augeasversion: '1.2.0' }
+               end
+        facts.merge(data)
       end
 
       context 'with ensure set to present' do
