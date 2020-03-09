@@ -1,3 +1,7 @@
+## 2020-03-09 - Release 2.5.0
+
+* Add support for EL8 [GH #59]
+
 ## 2020-01-07 - Release 2.4.0
 
 * Remove augeasversion check [GH #53]
