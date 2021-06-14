@@ -11,17 +11,14 @@
 #
 #   kmod::blacklist { 'pcspkr': }
 #
-define kmod::blacklist(
+define kmod::blacklist (
   $ensure=present,
   $file='/etc/modprobe.d/blacklist.conf',
 ) {
-
-
   kmod::setting { "kmod::blacklist ${title}":
     ensure   => $ensure,
     module   => $name,
     file     => $file,
     category => 'blacklist',
   }
-
 }

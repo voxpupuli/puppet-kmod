@@ -14,11 +14,11 @@ describe 'kmod::blacklist', type: :define do
 
         it { is_expected.to contain_kmod__blacklist('foo') }
         it {
-          is_expected.to contain_kmod__setting('kmod::blacklist foo')
-            .with('ensure'     => 'present',
-                  'category'   => 'blacklist',
-                  'module'     => 'foo',
-                  'file'       => '/bar/baz')
+          is_expected.to contain_kmod__setting('kmod::blacklist foo').
+            with('ensure'     => 'present',
+                 'category'   => 'blacklist',
+                 'module'     => 'foo',
+                 'file'       => '/bar/baz')
         }
       end
 
@@ -27,11 +27,11 @@ describe 'kmod::blacklist', type: :define do
 
         it { is_expected.to contain_kmod__blacklist('foo') }
         it {
-          is_expected.to contain_kmod__setting('kmod::blacklist foo')
-            .with('ensure'     => 'present',
-                  'category'   => 'blacklist',
-                  'module'     => 'foo',
-                  'file'       => '/etc/modprobe.d/blacklist.conf')
+          is_expected.to contain_kmod__setting('kmod::blacklist foo').
+            with('ensure'     => 'present',
+                 'category'   => 'blacklist',
+                 'module'     => 'foo',
+                 'file'       => '/etc/modprobe.d/blacklist.conf')
         }
       end
 
@@ -40,11 +40,11 @@ describe 'kmod::blacklist', type: :define do
 
         it { is_expected.to contain_kmod__blacklist('foo') }
         it {
-          is_expected.to contain_kmod__setting('kmod::blacklist foo')
-            .with('ensure'     => 'absent',
-                  'category'   => 'blacklist',
-                  'module'     => 'foo',
-                  'file'       => '/bar/baz')
+          is_expected.to contain_kmod__setting('kmod::blacklist foo').
+            with('ensure'     => 'absent',
+                 'category'   => 'blacklist',
+                 'module'     => 'foo',
+                 'file'       => '/bar/baz')
         }
       end
     end

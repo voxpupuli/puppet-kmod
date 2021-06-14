@@ -3,7 +3,7 @@
 # == Example
 #
 #
-define kmod::setting(
+define kmod::setting (
   $file,
   $category,
   $option = undef,
@@ -11,10 +11,9 @@ define kmod::setting(
   $module = $name,
   $ensure = 'present',
 ) {
+  include kmod
 
-  include ::kmod
-
-  ensure_resource('file', $file, { 'ensure' => 'file'} )
+  ensure_resource('file', $file, { 'ensure' => 'file' })
   case $ensure {
     'present': {
       if $option {
