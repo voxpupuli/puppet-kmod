@@ -12,12 +12,11 @@
 #
 #   kmod::install { 'pcspkr': }
 #
-define kmod::install(
+define kmod::install (
   $ensure=present,
   $command='/bin/true',
   $file="/etc/modprobe.d/${name}.conf",
 ) {
-
   kmod::setting { "kmod::install ${title}":
     ensure   => $ensure,
     module   => $name,
@@ -26,5 +25,4 @@ define kmod::install(
     option   => 'command',
     value    => $command,
   }
-
 }

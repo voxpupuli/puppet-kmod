@@ -11,7 +11,7 @@ class kmod (
   Optional[Hash] $list_of_installs   = {},
   Optional[Hash] $list_of_loads      = {},
   Optional[Hash] $list_of_options    = {},
-){
+) {
   file { '/etc/modprobe.d': ensure => directory }
 
   file { [

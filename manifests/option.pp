@@ -6,21 +6,19 @@
 #       option => 'bonding',
 #     }
 #
-define kmod::option(
+define kmod::option (
   $option,
   $value,
   $module = $name,
   $ensure = 'present',
   $file   = undef,
 ) {
-
-  include ::kmod
+  include kmod
 
   $target_file = $file ? {
     undef   => "/etc/modprobe.d/${module}.conf",
     default => $file,
   }
-
 
   kmod::setting { "kmod::option ${title}":
     ensure   => $ensure,
@@ -30,6 +28,4 @@ define kmod::option(
     option   => $option,
     value    => $value,
   }
-
 }
-

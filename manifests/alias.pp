@@ -6,14 +6,13 @@
 #       alias => 'bonding',
 #     }
 #
-define kmod::alias(
+define kmod::alias (
   $source,
   $ensure     = 'present',
   $file       = "/etc/modprobe.d/${name}.conf",
   $aliasname  = $name,
 ) {
-
-  include ::kmod
+  include kmod
 
   kmod::setting { "kmod::alias ${title}":
     ensure   => $ensure,
@@ -23,5 +22,4 @@ define kmod::alias(
     option   => 'modulename',
     value    => $source,
   }
-
 }

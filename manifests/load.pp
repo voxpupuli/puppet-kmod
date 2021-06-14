@@ -12,21 +12,20 @@
 #
 #   kmod::load { 'sha256': }
 #
-define kmod::load(
+define kmod::load (
   $ensure=present,
   $file='/etc/modules',
 ) {
-
   case $ensure {
     'present': {
-      case $::osfamily {
+      case $facts['os']['family'] {
         'Debian': {
           $changes = "clear '${name}'"
         }
         'Suse': {
           $changes = "set MODULES_LOADED_ON_BOOT/value[.='${name}'] '${name}'"
         }
-        default: { }
+        default: {}
       }
 
       exec { "modprobe ${name}":
@@ -36,14 +35,14 @@ define kmod::load(
     }
 
     'absent': {
-      case $::osfamily {
+      case $facts['os']['family'] {
         'Debian': {
           $changes = "rm '${name}'"
         }
         'Suse': {
           $changes = "rm MODULES_LOADED_ON_BOOT/value[.='${name}']"
         }
-        default: { }
+        default: {}
       }
 
       exec { "modprobe -r ${name}":
@@ -62,9 +61,9 @@ define kmod::load(
       content => "# This file is managed by the puppet kmod module.\n${name}\n",
     }
   } else {
-    case $::osfamily {
+    case $facts['os']['family'] {
       'Debian': {
-        augeas {"Manage ${name} in ${file}":
+        augeas { "Manage ${name} in ${file}":
           incl    => $file,
           lens    => 'Modules.lns',
           changes => $changes,
@@ -89,7 +88,7 @@ define kmod::load(
         }
       }
       default: {
-        fail "${module_name}: Unknown OS family ${::osfamily}"
+        fail "${module_name}: Unknown OS family ${facts['os']['family']}"
       }
     }
   }
