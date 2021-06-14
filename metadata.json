@@ -1,12 +1,12 @@
 {
-  "name": "camptocamp-kmod",
+  "name": "puppet-kmod",
   "version": "2.5.0",
-  "author": "camptocamp",
+  "author": "Vox Pupuli",
   "summary": "Manage Linux kernel modules with Puppet",
   "license": "Apache-2.0",
-  "source": "https://github.com/camptocamp/puppet-kmod",
-  "project_page": "https://github.com/camptocamp/puppet-kmod",
-  "issues_url": "https://github.com/camptocamp/puppet-kmod/issues",
+  "source": "https://github.com/voxpupuli/puppet-kmod",
+  "project_page": "https://github.com/voxpupuli/puppet-kmod",
+  "issues_url": "https://github.com/voxpupuli/puppet-kmod/issues",
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
