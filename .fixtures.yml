@@ -1,9 +1,4 @@
 fixtures:
-  forge_modules:
-    augeas_core:
-      repo: "puppetlabs/augeas_core"
-      puppet_version: '>= 6.0.0'
   repositories:
-    "stdlib": "git://github.com/puppetlabs/puppetlabs-stdlib.git"
-  symlinks:
-    "kmod": "#{source_dir}"
+    stdlib: https://github.com/puppetlabs/puppetlabs-stdlib.git
+    augeas_core: https://github.com/puppetlabs/puppetlabs-augeas_core.git
