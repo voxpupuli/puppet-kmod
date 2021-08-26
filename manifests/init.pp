@@ -6,11 +6,11 @@
 #
 #
 class kmod (
-  Optional[Hash] $list_of_aliases    = {},
-  Optional[Hash] $list_of_blacklists = {},
-  Optional[Hash] $list_of_installs   = {},
-  Optional[Hash] $list_of_loads      = {},
-  Optional[Hash] $list_of_options    = {},
+  Hash $list_of_aliases    = {},
+  Hash $list_of_blacklists = {},
+  Hash $list_of_installs   = {},
+  Hash $list_of_loads      = {},
+  Hash $list_of_options    = {},
 ) {
   file { '/etc/modprobe.d': ensure => directory }
 
