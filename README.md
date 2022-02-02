@@ -1,9 +1,13 @@
 # Kmod Puppet module
 
-[![Puppet Forge Version](http://img.shields.io/puppetforge/v/camptocamp/kmod.svg)](https://forge.puppetlabs.com/camptocamp/kmod)
-[![Puppet Forge Downloads](http://img.shields.io/puppetforge/dt/camptocamp/kmod.svg)](https://forge.puppetlabs.com/camptocamp/kmod)
-[![Build Status](https://img.shields.io/travis/camptocamp/puppet-kmod/master.svg)](https://travis-ci.org/camptocamp/puppet-kmod)
-[![Puppet Forge Endorsement](https://img.shields.io/puppetforge/e/camptocamp/kmod.svg)](https://forge.puppetlabs.com/camptocamp/kmod)
+[![Build Status](https://github.com/voxpupuli/puppet-kmod/workflows/CI/badge.svg)](https://github.com/voxpupuli/puppet-kmod/actions?query=workflow%3ACI)
+[![Release](https://github.com/voxpupuli/puppet-kmod/actions/workflows/release.yml/badge.svg)](https://github.com/voxpupuli/puppet-kmod/actions/workflows/release.yml)
+[![Puppet Forge](https://img.shields.io/puppetforge/v/puppet/kmod.svg)](https://forge.puppetlabs.com/puppet/kmod)
+[![Puppet Forge - downloads](https://img.shields.io/puppetforge/dt/puppet/kmod.svg)](https://forge.puppetlabs.com/puppet/kmod)
+[![Puppet Forge - endorsement](https://img.shields.io/puppetforge/e/puppet/kmod.svg)](https://forge.puppetlabs.com/puppet/kmod)
+[![Puppet Forge - scores](https://img.shields.io/puppetforge/f/puppet/kmod.svg)](https://forge.puppetlabs.com/puppet/kmod)
+[![puppetmodule.info docs](http://www.puppetmodule.info/images/badge.png)](http://www.puppetmodule.info/m/puppet-kmod)
+[![Apache 2 License](https://img.shields.io/github/license/voxpupuli/puppet-kmod.svg)](LICENSE)
 [![Donated by Camptocamp](https://img.shields.io/badge/donated%20by-camptocamp-fb7047.svg)](#transfer-notice)
 
 ## Description
