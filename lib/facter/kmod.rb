@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Facter.add(:kmods) do
   confine kernel: :linux
 
@@ -17,9 +19,10 @@ Facter.add(:kmods) do
           begin
             Dir.foreach("/sys/module/#{directory}/parameters") do |param|
               next if ['.', '..'].include?(param)
+
               kmod[directory]['parameters'][param] = File.read("/sys/module/#{directory}/parameters/#{param}").chomp
             end
-          rescue => e
+          rescue StandardError => e
             Facter.warn(e)
           end
         end
@@ -28,9 +31,10 @@ Facter.add(:kmods) do
           begin
             Dir.foreach("/sys/module/#{directory}/holders") do |used|
               next if ['.', '..'].include?(used)
+
               kmod[directory]['used_by'] << used
             end
-          rescue => e
+          rescue StandardError => e
             Facter.warn(e)
           end
         end

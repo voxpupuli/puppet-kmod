@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'kmod::load', type: :define do
@@ -18,6 +20,7 @@ describe 'kmod::load', type: :define do
         let(:params) { { ensure: 'present', file: '/foo/bar' } }
 
         it { is_expected.to contain_kmod__load('foo') }
+
         it {
           is_expected.to contain_exec('modprobe foo').
             with('unless' => "egrep -q '^foo ' /proc/modules")
@@ -37,26 +40,28 @@ describe 'kmod::load', type: :define do
         end
 
         context 'when not on systemd' do
+          it { is_expected.to compile.with_all_deps }
+
           case facts[:osfamily]
           when 'Debian'
             it {
               is_expected.to contain_augeas('Manage foo in /foo/bar').
                 with('incl' => '/foo/bar',
-                     'lens'    => 'Modules.lns',
+                     'lens' => 'Modules.lns',
                      'changes' => "clear 'foo'")
             }
           when 'Suse'
             it {
               is_expected.to contain_augeas('sysconfig_kernel_MODULES_LOADED_ON_BOOT_foo').
                 with('incl' => '/foo/bar',
-                     'lens'    => 'Shellvars_list.lns',
+                     'lens' => 'Shellvars_list.lns',
                      'changes' => "set MODULES_LOADED_ON_BOOT/value[.='foo'] 'foo'")
             }
           when 'RedHat'
             it {
               is_expected.to contain_file('/etc/sysconfig/modules/foo.modules').
                 with('ensure' => 'present',
-                     'mode'    => '0755',
+                     'mode' => '0755',
                      'content' => %r{exec /sbin/modprobe foo > /dev/null 2>&1})
             }
           end
@@ -67,6 +72,7 @@ describe 'kmod::load', type: :define do
         let(:params) { { ensure: 'absent', file: '/foo/bar' } }
 
         it { is_expected.to contain_kmod__load('foo') }
+
         it {
           is_expected.to contain_exec('modprobe -r foo').
             with('onlyif' => "egrep -q '^foo ' /proc/modules")
@@ -86,26 +92,28 @@ describe 'kmod::load', type: :define do
         end
 
         context 'when not on systemd' do
+          it { is_expected.to compile.with_all_deps }
+
           case facts[:osfamily]
           when 'Debian'
             it {
               is_expected.to contain_augeas('Manage foo in /foo/bar').
                 with('incl' => '/foo/bar',
-                     'lens'    => 'Modules.lns',
+                     'lens' => 'Modules.lns',
                      'changes' => "rm 'foo'")
             }
           when 'Suse'
             it {
               is_expected.to contain_augeas('sysconfig_kernel_MODULES_LOADED_ON_BOOT_foo').
                 with('incl' => '/foo/bar',
-                     'lens'    => 'Shellvars_list.lns',
+                     'lens' => 'Shellvars_list.lns',
                      'changes' => "rm MODULES_LOADED_ON_BOOT/value[.='foo']")
             }
           when 'RedHat'
             it {
               is_expected.to contain_file('/etc/sysconfig/modules/foo.modules').
                 with('ensure' => 'absent',
-                     'mode'    => '0755',
+                     'mode' => '0755',
                      'content' => %r{exec /sbin/modprobe foo > /dev/null 2>&1})
             }
           end

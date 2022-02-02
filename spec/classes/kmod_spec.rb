@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'kmod', type: :class do
@@ -9,6 +11,7 @@ describe 'kmod', type: :class do
 
       it { is_expected.to contain_class('kmod') }
       it { is_expected.to contain_file('/etc/modprobe.d').with('ensure' => 'directory') }
+
       ['modprobe.conf', 'aliases.conf', 'blacklist.conf'].each do |file|
         it { is_expected.to contain_file("/etc/modprobe.d/#{file}").with('ensure' => 'file') }
       end
