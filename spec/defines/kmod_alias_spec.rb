@@ -15,14 +15,15 @@ describe 'kmod::alias', type: :define do
         let(:params) { default_params }
 
         it { is_expected.to contain_kmod__alias('foo') }
+
         it {
           is_expected.to contain_kmod__setting('kmod::alias foo').
-            with('ensure'    => 'present',
-                 'module'    => 'foo',
-                 'file'      => '/baz',
-                 'category'  => 'alias',
-                 'option'    => 'modulename',
-                 'value'     => 'bar')
+            with('ensure' => 'present',
+                 'module' => 'foo',
+                 'file' => '/baz',
+                 'category' => 'alias',
+                 'option' => 'modulename',
+                 'value' => 'bar')
         }
       end
 
@@ -30,14 +31,15 @@ describe 'kmod::alias', type: :define do
         let(:params) { default_params.merge!(aliasname: 'tango') }
 
         it { is_expected.to contain_kmod__alias('foo') }
+
         it {
           is_expected.to contain_kmod__setting('kmod::alias foo').
-            with('ensure'    => 'present',
-                 'module'    => 'tango',
-                 'file'      => '/baz',
-                 'category'  => 'alias',
-                 'option'    => 'modulename',
-                 'value'     => 'bar')
+            with('ensure' => 'present',
+                 'module' => 'tango',
+                 'file' => '/baz',
+                 'category' => 'alias',
+                 'option' => 'modulename',
+                 'value' => 'bar')
         }
       end
 
@@ -45,9 +47,10 @@ describe 'kmod::alias', type: :define do
         let(:params) { default_params.merge!(ensure: 'absent') }
 
         it { is_expected.to contain_kmod__alias('foo') }
+
         it {
           is_expected.to contain_kmod__setting('kmod::alias foo').
-            with('ensure'    => 'absent')
+            with('ensure' => 'absent')
         }
       end
     end

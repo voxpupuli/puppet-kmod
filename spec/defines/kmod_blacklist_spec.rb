@@ -13,12 +13,13 @@ describe 'kmod::blacklist', type: :define do
         let(:params) { { ensure: 'present', file: '/bar/baz' } }
 
         it { is_expected.to contain_kmod__blacklist('foo') }
+
         it {
           is_expected.to contain_kmod__setting('kmod::blacklist foo').
-            with('ensure'     => 'present',
-                 'category'   => 'blacklist',
-                 'module'     => 'foo',
-                 'file'       => '/bar/baz')
+            with('ensure' => 'present',
+                 'category' => 'blacklist',
+                 'module' => 'foo',
+                 'file' => '/bar/baz')
         }
       end
 
@@ -26,12 +27,13 @@ describe 'kmod::blacklist', type: :define do
         let(:params) { { ensure: 'present' } }
 
         it { is_expected.to contain_kmod__blacklist('foo') }
+
         it {
           is_expected.to contain_kmod__setting('kmod::blacklist foo').
-            with('ensure'     => 'present',
-                 'category'   => 'blacklist',
-                 'module'     => 'foo',
-                 'file'       => '/etc/modprobe.d/blacklist.conf')
+            with('ensure' => 'present',
+                 'category' => 'blacklist',
+                 'module' => 'foo',
+                 'file' => '/etc/modprobe.d/blacklist.conf')
         }
       end
 
@@ -39,12 +41,13 @@ describe 'kmod::blacklist', type: :define do
         let(:params) { { ensure: 'absent', file: '/bar/baz' } }
 
         it { is_expected.to contain_kmod__blacklist('foo') }
+
         it {
           is_expected.to contain_kmod__setting('kmod::blacklist foo').
-            with('ensure'     => 'absent',
-                 'category'   => 'blacklist',
-                 'module'     => 'foo',
-                 'file'       => '/bar/baz')
+            with('ensure' => 'absent',
+                 'category' => 'blacklist',
+                 'module' => 'foo',
+                 'file' => '/bar/baz')
         }
       end
     end
