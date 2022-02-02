@@ -4,6 +4,27 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v3.1.0](https://github.com/voxpupuli/puppet-kmod/tree/v3.1.0) (2022-02-02)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-kmod/compare/v3.0.0...v3.1.0)
+
+**Implemented enhancements:**
+
+- Add kmod fact [\#44](https://github.com/voxpupuli/puppet-kmod/pull/44) ([jcpunk](https://github.com/jcpunk))
+
+**Fixed bugs:**
+
+- Fix file detection to gather kmod fact [\#75](https://github.com/voxpupuli/puppet-kmod/pull/75) ([kajinamit](https://github.com/kajinamit))
+
+**Closed issues:**
+
+- kmod fact consistently fails with 'expected argument to be a String, Symbol, or Hash' [\#74](https://github.com/voxpupuli/puppet-kmod/issues/74)
+
+**Merged pull requests:**
+
+- Allow stdlib 8.0.0 [\#71](https://github.com/voxpupuli/puppet-kmod/pull/71) ([smortex](https://github.com/smortex))
+- pull fixtures from git and not forge [\#70](https://github.com/voxpupuli/puppet-kmod/pull/70) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [v3.0.0](https://github.com/voxpupuli/puppet-kmod/tree/v3.0.0) (2021-06-14)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-kmod/compare/2.5.0...v3.0.0)
