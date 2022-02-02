@@ -40,6 +40,8 @@ describe 'kmod::load', type: :define do
         end
 
         context 'when not on systemd' do
+          it { is_expected.to compile.with_all_deps }
+
           case facts[:osfamily]
           when 'Debian'
             it {
@@ -90,6 +92,8 @@ describe 'kmod::load', type: :define do
         end
 
         context 'when not on systemd' do
+          it { is_expected.to compile.with_all_deps }
+
           case facts[:osfamily]
           when 'Debian'
             it {
