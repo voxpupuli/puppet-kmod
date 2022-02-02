@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Facter.add(:kmods) do
   confine kernel: :linux
 
