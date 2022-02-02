@@ -1,12 +1,12 @@
 Facter.add(:kmods) do
-  confine :kernel => :linux
+  confine kernel: :linux
 
   kmod = {}
 
   setcode do
-    if File.exists?('/sys/module')
+    if File.exist?('/sys/module')
       Dir.foreach('/sys/module') do |directory|
-        next if directory == '.' or directory == '..'
+        next if ['.', '..'].include?(directory)
 
         kmod[directory] = {
           'parameters' => {},
@@ -16,7 +16,7 @@ Facter.add(:kmods) do
         if File.directory?("/sys/module/#{directory}/parameters")
           begin
             Dir.foreach("/sys/module/#{directory}/parameters") do |param|
-              next if param == '.' or param == '..'
+              next if ['.', '..'].include?(param)
               kmod[directory]['parameters'][param] = File.read("/sys/module/#{directory}/parameters/#{param}").chomp
             end
           rescue => e
@@ -27,7 +27,7 @@ Facter.add(:kmods) do
         if File.directory?("/sys/module/#{directory}/holders")
           begin
             Dir.foreach("/sys/module/#{directory}/holders") do |used|
-              next if used == '.' or used == '..'
+              next if ['.', '..'].include?(used)
               kmod[directory]['used_by'] << used
             end
           rescue => e
