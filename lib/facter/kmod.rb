@@ -20,8 +20,12 @@ Facter.add(:kmods) do
             Dir.foreach("/sys/module/#{directory}/parameters") do |param|
               next if ['.', '..'].include?(param)
 
+              next unless File.readable?("/sys/module/#{directory}/parameters/#{param}")
+
               kmod[directory]['parameters'][param] = File.read("/sys/module/#{directory}/parameters/#{param}").chomp
             end
+          rescue Errno::EACCES => e
+            Facter.debug(e)
           rescue StandardError => e
             Facter.warn(e)
           end
