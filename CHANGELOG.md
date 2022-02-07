@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v3.1.1](https://github.com/voxpupuli/puppet-kmod/tree/v3.1.1) (2022-02-07)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-kmod/compare/v3.1.0...v3.1.1)
+
+**Merged pull requests:**
+
+- Hide read error on params when you can't read them [\#78](https://github.com/voxpupuli/puppet-kmod/pull/78) ([jcpunk](https://github.com/jcpunk))
+
 ## [v3.1.0](https://github.com/voxpupuli/puppet-kmod/tree/v3.1.0) (2022-02-02)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-kmod/compare/v3.0.0...v3.1.0)
