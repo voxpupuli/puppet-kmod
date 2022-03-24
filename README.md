@@ -50,7 +50,7 @@ Adds an alias to modprobe.conf, by default `/etc/modprobe.d/<name>.conf` is assu
 ```
 
 Params:
-* `modulename`: Name of the module to alias
+* `source`: Name of the module to alias
 * `aliasname`: Name of the alias (defaults to the resource title)
 * `file`: File to write to (see above default)
 
