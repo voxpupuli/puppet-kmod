@@ -45,7 +45,7 @@ Adds an alias to modprobe.conf, by default `/etc/modprobe.d/<name>.conf` is assu
 
 ```puppet
   kmod::alias { 'bond0':
-    aliasname => 'bonding',
+    source => 'bonding',
   }
 ```
 
