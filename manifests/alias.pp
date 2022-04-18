@@ -3,7 +3,7 @@
 # == Example
 #
 #     kmod::alias { 'bond0':
-#       alias => 'bonding',
+#       source => 'bonding',
 #     }
 #
 define kmod::alias (
