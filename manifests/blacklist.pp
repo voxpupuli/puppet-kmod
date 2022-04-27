@@ -1,20 +1,16 @@
+# @summary Set a kernel module as blacklisted.
 #
-# == Definition: kmod::blacklist
+# @param ensure State of the setting
+# @param file File to manage
 #
-# Set a kernel module as blacklisted.
-#
-# Parameters:
-# - *ensure*: present/absent;
-# - *file*: optionally, set the file where the stanza is written.
-#
-# Example usage:
-#
+# @example
 #   kmod::blacklist { 'pcspkr': }
-#
 define kmod::blacklist (
-  $ensure=present,
-  $file='/etc/modprobe.d/blacklist.conf',
+  Enum['present', 'absent'] $ensure = 'present',
+  Stdlib::Unixpath          $file   = '/etc/modprobe.d/blacklist.conf',
 ) {
+  include kmod
+
   kmod::setting { "kmod::blacklist ${title}":
     ensure   => $ensure,
     module   => $name,

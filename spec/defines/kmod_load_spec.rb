@@ -119,6 +119,48 @@ describe 'kmod::load', type: :define do
           end
         end
       end
+
+      context 'when file permissions are specified' do
+        let(:params) { { ensure: 'present', file: '/foo/bar' } }
+        let(:pre_condition) do
+          <<~END
+            class { 'kmod':
+              owner     => 'adm',
+              group     => 'sys',
+              file_mode => '0600',
+              exe_mode  => '0711',
+            }
+          END
+        end
+
+        it { is_expected.to contain_kmod__load('foo') }
+
+        it do
+          case facts[:osfamily]
+          when 'RedHat'
+            is_expected.to contain_file('/etc/sysconfig/modules/foo.modules').
+              with(
+                'owner' => 'adm',
+                'group' => 'sys',
+                'mode' => '0711'
+              )
+          when 'Archlinux'
+            is_expected.to contain_file('/etc/modules-load.d/foo.conf').
+              with(
+                'owner' => 'adm',
+                'group' => 'sys',
+                'mode' => '0600'
+              )
+          else
+            is_expected.to contain_file(params[:file]).
+              with(
+                'owner' => 'adm',
+                'group' => 'sys',
+                'mode' => '0600'
+              )
+          end
+        end
+      end
     end
   end
 end

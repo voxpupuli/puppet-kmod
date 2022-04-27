@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# @summary Return a hash of loaded kernel modules
+
 Facter.add(:kmods) do
   confine kernel: :linux
 
