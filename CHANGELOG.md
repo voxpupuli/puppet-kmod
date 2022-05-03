@@ -4,6 +4,30 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v3.2.0](https://github.com/voxpupuli/puppet-kmod/tree/v3.2.0) (2022-05-03)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-kmod/compare/v3.1.1...v3.2.0)
+
+**Implemented enhancements:**
+
+- \(\#86\) Enforce permissions on created files [\#87](https://github.com/voxpupuli/puppet-kmod/pull/87) ([silug](https://github.com/silug))
+
+**Fixed bugs:**
+
+- kmod::alias documentation incorrectly refers to modulename [\#82](https://github.com/voxpupuli/puppet-kmod/issues/82)
+- Ignore kmod fact read errors [\#81](https://github.com/voxpupuli/puppet-kmod/pull/81) ([jcpunk](https://github.com/jcpunk))
+
+**Closed issues:**
+
+- Need a way to enforce permissions on created files [\#86](https://github.com/voxpupuli/puppet-kmod/issues/86)
+- README.md kmod::alias example is incorrect [\#84](https://github.com/voxpupuli/puppet-kmod/issues/84)
+- Warning after upgrading to v3.1.0 [\#79](https://github.com/voxpupuli/puppet-kmod/issues/79)
+
+**Merged pull requests:**
+
+- Fix kmod::alias example [\#85](https://github.com/voxpupuli/puppet-kmod/pull/85) ([silug](https://github.com/silug))
+- Update kmod::alias documentation [\#83](https://github.com/voxpupuli/puppet-kmod/pull/83) ([silug](https://github.com/silug))
+
 ## [v3.1.1](https://github.com/voxpupuli/puppet-kmod/tree/v3.1.1) (2022-02-07)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-kmod/compare/v3.1.0...v3.1.1)
