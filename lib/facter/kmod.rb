@@ -18,30 +18,27 @@ Facter.add(:kmods) do
         }
 
         if File.directory?("/sys/module/#{directory}/parameters")
-          begin
-            Dir.foreach("/sys/module/#{directory}/parameters") do |param|
-              next if ['.', '..'].include?(param)
+          Dir.foreach("/sys/module/#{directory}/parameters") do |param|
+            next if ['.', '..'].include?(param)
 
-              next unless File.readable?("/sys/module/#{directory}/parameters/#{param}")
+            next unless File.readable?("/sys/module/#{directory}/parameters/#{param}")
 
+            begin
               kmod[directory]['parameters'][param] = File.read("/sys/module/#{directory}/parameters/#{param}").chomp
+            rescue StandardError
+              # some kernel parameters are write only
+              # even though they have the read bit set
+              # so just ignore read errors
+              nil
             end
-          rescue Errno::EACCES => e
-            Facter.debug(e)
-          rescue StandardError => e
-            Facter.warn(e)
           end
         end
 
         if File.directory?("/sys/module/#{directory}/holders")
-          begin
-            Dir.foreach("/sys/module/#{directory}/holders") do |used|
-              next if ['.', '..'].include?(used)
+          Dir.foreach("/sys/module/#{directory}/holders") do |used|
+            next if ['.', '..'].include?(used)
 
-              kmod[directory]['used_by'] << used
-            end
-          rescue StandardError => e
-            Facter.warn(e)
+            kmod[directory]['used_by'] << used
           end
         end
       end
