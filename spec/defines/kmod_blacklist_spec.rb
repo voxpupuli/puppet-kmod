@@ -52,6 +52,30 @@ describe 'kmod::blacklist', type: :define do
                  'file' => '/bar/baz')
         }
       end
+
+      context 'when file permissions are specified' do
+        let(:params) { { file: '/bar/baz' } }
+        let(:pre_condition) do
+          <<~END
+            class { 'kmod':
+              owner     => 'adm',
+              group     => 'sys',
+              file_mode => '0600',
+            }
+          END
+        end
+
+        it { is_expected.to contain_kmod__blacklist('foo') }
+
+        it {
+          is_expected.to contain_file(params[:file]).
+            with(
+              'owner' => 'adm',
+              'group' => 'sys',
+              'mode' => '0600'
+            )
+        }
+      end
     end
   end
 end

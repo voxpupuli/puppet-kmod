@@ -11,7 +11,7 @@ describe 'kmod::setting', type: :define do
         facts.merge(augeasversion: '1.2.0')
       end
 
-      let(:default_params) { { file: 'modprobe.conf' } }
+      let(:default_params) { { file: '/etc/modprobe.conf' } }
       let(:params) { default_params }
 
       context 'add an alias' do
@@ -21,10 +21,10 @@ describe 'kmod::setting', type: :define do
 
         it {
           is_expected.to contain_augeas('kmod::setting foo foo').
-            with('incl' => 'modprobe.conf',
+            with('incl' => '/etc/modprobe.conf',
                  'lens' => 'Modprobe.lns',
                  'changes' => ["set alias[. = 'foo'] foo", "set alias[. = 'foo']/modulename tango"],
-                 'require' => 'File[modprobe.conf]')
+                 'require' => 'File[/etc/modprobe.conf]')
         }
       end
 
@@ -39,6 +39,44 @@ describe 'kmod::setting', type: :define do
                  'lens' => 'Modprobe.lns',
                  'changes' => ["set blacklist[. = 'foo'] foo"],
                  'require' => 'File[/etc/modprobe.d/blacklist.conf]')
+        }
+      end
+
+      context 'add an install with file permissions specified' do
+        let(:params) do
+          default_params.merge(
+            category: 'install',
+            option: 'command',
+            value: '/bin/true'
+          )
+        end
+        let(:pre_condition) do
+          <<~END
+            class { 'kmod':
+              owner     => 'adm',
+              group     => 'sys',
+              file_mode => '0600',
+            }
+          END
+        end
+
+        it { is_expected.to contain_kmod__setting('foo') }
+
+        it {
+          is_expected.to contain_augeas('kmod::setting foo foo').
+            with('incl' => '/etc/modprobe.conf',
+                 'lens' => 'Modprobe.lns',
+                 'changes' => ["set install[. = 'foo'] foo", "set install[. = 'foo']/command /bin/true"],
+                 'require' => 'File[/etc/modprobe.conf]')
+        }
+
+        it {
+          is_expected.to contain_file(params[:file]).
+            with(
+              'owner' => 'adm',
+              'group' => 'sys',
+              'mode' => '0600'
+            )
         }
       end
     end
