@@ -23,7 +23,7 @@ describe 'kmod::load', type: :define do
 
         it {
           is_expected.to contain_exec('modprobe foo').
-            with('unless' => "egrep -q '^foo ' /proc/modules")
+            with('unless' => "grep -qE '^foo ' /proc/modules")
         }
 
         context 'when on systemd' do
@@ -75,7 +75,7 @@ describe 'kmod::load', type: :define do
 
         it {
           is_expected.to contain_exec('modprobe -r foo').
-            with('onlyif' => "egrep -q '^foo ' /proc/modules")
+            with('onlyif' => "grep -qE '^foo ' /proc/modules")
         }
 
         context 'when on systemd' do
