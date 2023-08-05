@@ -8,6 +8,7 @@ group :test do
   gem 'coveralls',                  :require => false
   gem 'simplecov-console',          :require => false
   gem 'puppet_metadata', '~> 1.0',  :require => false
+  gem 'panolint',                   :require => false
 end
 
 group :development do
