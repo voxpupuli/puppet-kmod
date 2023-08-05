@@ -4,3 +4,7 @@
 
 inherit_gem:
   voxpupuli-test: rubocop.yml
+
+AllCops:
+  Exclude:
+    - 'bin/*'

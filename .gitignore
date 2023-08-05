@@ -21,3 +21,4 @@ Puppetfile.lock
 .*.sw?
 .yardoc/
 Guardfile
+bin/
