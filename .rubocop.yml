@@ -4,3 +4,9 @@
 
 inherit_gem:
   voxpupuli-test: rubocop.yml
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'bin/*'
+    - 'vendor/bundle/**/*'
