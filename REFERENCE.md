@@ -10,12 +10,12 @@
 
 ### Defined types
 
-* [`kmod::alias`](#kmodalias): Manage kernel module aliases
-* [`kmod::blacklist`](#kmodblacklist): Set a kernel module as blacklisted.
-* [`kmod::install`](#kmodinstall): Set a kernel module as installed
-* [`kmod::load`](#kmodload): Manage a kernel module in /etc/modules.
-* [`kmod::option`](#kmodoption): Manage kernel module options
-* [`kmod::setting`](#kmodsetting): Manage kernel module settings
+* [`kmod::alias`](#kmod--alias): Manage kernel module aliases
+* [`kmod::blacklist`](#kmod--blacklist): Set a kernel module as blacklisted.
+* [`kmod::install`](#kmod--install): Set a kernel module as installed
+* [`kmod::load`](#kmod--load): Manage a kernel module in /etc/modules.
+* [`kmod::option`](#kmod--option): Manage kernel module options
+* [`kmod::setting`](#kmod--setting): Manage kernel module settings
 
 ## Classes
 
@@ -35,20 +35,20 @@ include kmod
 
 The following parameters are available in the `kmod` class:
 
-* [`list_of_aliases`](#list_of_aliases)
-* [`list_of_blacklists`](#list_of_blacklists)
-* [`list_of_installs`](#list_of_installs)
-* [`list_of_loads`](#list_of_loads)
-* [`list_of_options`](#list_of_options)
-* [`owner`](#owner)
-* [`group`](#group)
-* [`directory_mode`](#directory_mode)
-* [`file_mode`](#file_mode)
-* [`exe_mode`](#exe_mode)
-* [`modprobe_d`](#modprobe_d)
-* [`modprobe_d_files`](#modprobe_d_files)
+* [`list_of_aliases`](#-kmod--list_of_aliases)
+* [`list_of_blacklists`](#-kmod--list_of_blacklists)
+* [`list_of_installs`](#-kmod--list_of_installs)
+* [`list_of_loads`](#-kmod--list_of_loads)
+* [`list_of_options`](#-kmod--list_of_options)
+* [`owner`](#-kmod--owner)
+* [`group`](#-kmod--group)
+* [`directory_mode`](#-kmod--directory_mode)
+* [`file_mode`](#-kmod--file_mode)
+* [`exe_mode`](#-kmod--exe_mode)
+* [`modprobe_d`](#-kmod--modprobe_d)
+* [`modprobe_d_files`](#-kmod--modprobe_d_files)
 
-##### <a name="list_of_aliases"></a>`list_of_aliases`
+##### <a name="-kmod--list_of_aliases"></a>`list_of_aliases`
 
 Data type: `Hash`
 
@@ -56,7 +56,7 @@ Hash of [`kmod::alias`](#kmodalias) resources
 
 Default value: `{}`
 
-##### <a name="list_of_blacklists"></a>`list_of_blacklists`
+##### <a name="-kmod--list_of_blacklists"></a>`list_of_blacklists`
 
 Data type: `Hash`
 
@@ -64,7 +64,7 @@ Hash of [`kmod::blacklist`](#kmodblacklist) resources
 
 Default value: `{}`
 
-##### <a name="list_of_installs"></a>`list_of_installs`
+##### <a name="-kmod--list_of_installs"></a>`list_of_installs`
 
 Data type: `Hash`
 
@@ -72,7 +72,7 @@ Hash of [`kmod::install`](#kmodinstall) resources
 
 Default value: `{}`
 
-##### <a name="list_of_loads"></a>`list_of_loads`
+##### <a name="-kmod--list_of_loads"></a>`list_of_loads`
 
 Data type: `Hash`
 
@@ -80,7 +80,7 @@ Hash of [`kmod::load`](#kmodload) resources
 
 Default value: `{}`
 
-##### <a name="list_of_options"></a>`list_of_options`
+##### <a name="-kmod--list_of_options"></a>`list_of_options`
 
 Data type: `Hash`
 
@@ -88,7 +88,7 @@ Hash of [`kmod::option`](#kmodoption) resources
 
 Default value: `{}`
 
-##### <a name="owner"></a>`owner`
+##### <a name="-kmod--owner"></a>`owner`
 
 Data type: `String[1]`
 
@@ -96,7 +96,7 @@ Default owner for all files (set via Hiera to allow defaults on all defined type
 
 Default value: `'root'`
 
-##### <a name="group"></a>`group`
+##### <a name="-kmod--group"></a>`group`
 
 Data type: `String[1]`
 
@@ -104,7 +104,7 @@ Default group for all files (set via Hiera to allow defaults on all defined type
 
 Default value: `'root'`
 
-##### <a name="directory_mode"></a>`directory_mode`
+##### <a name="-kmod--directory_mode"></a>`directory_mode`
 
 Data type: `Stdlib::Filemode`
 
@@ -112,7 +112,7 @@ Default mode for all directories (set via Hiera to allow defaults on all defined
 
 Default value: `'0755'`
 
-##### <a name="file_mode"></a>`file_mode`
+##### <a name="-kmod--file_mode"></a>`file_mode`
 
 Data type: `Stdlib::Filemode`
 
@@ -120,7 +120,7 @@ Default mode for all regular files (set via Hiera to allow defaults on all defin
 
 Default value: `'0644'`
 
-##### <a name="exe_mode"></a>`exe_mode`
+##### <a name="-kmod--exe_mode"></a>`exe_mode`
 
 Data type: `Stdlib::Filemode`
 
@@ -128,7 +128,7 @@ Default mode for all executable files (set via Hiera to allow defaults on all de
 
 Default value: `'0755'`
 
-##### <a name="modprobe_d"></a>`modprobe_d`
+##### <a name="-kmod--modprobe_d"></a>`modprobe_d`
 
 Data type: `Stdlib::Unixpath`
 
@@ -136,21 +136,25 @@ Location of `modprobe.d` directory
 
 Default value: `'/etc/modprobe.d'`
 
-##### <a name="modprobe_d_files"></a>`modprobe_d_files`
+##### <a name="-kmod--modprobe_d_files"></a>`modprobe_d_files`
 
 Data type: `Array[Stdlib::Unixpath]`
 
 Default files to create in `modprobe.d` directory
 
-Default value: `[
+Default value:
+
+```puppet
+[
     '/etc/modprobe.d/modprobe.conf',
     '/etc/modprobe.d/aliases.conf',
     '/etc/modprobe.d/blacklist.conf',
-  ]`
+  ]
+```
 
 ## Defined types
 
-### <a name="kmodalias"></a>`kmod::alias`
+### <a name="kmod--alias"></a>`kmod::alias`
 
 Manage kernel module aliases
 
@@ -168,18 +172,18 @@ kmod::alias { 'bond0':
 
 The following parameters are available in the `kmod::alias` defined type:
 
-* [`source`](#source)
-* [`ensure`](#ensure)
-* [`file`](#file)
-* [`aliasname`](#aliasname)
+* [`source`](#-kmod--alias--source)
+* [`ensure`](#-kmod--alias--ensure)
+* [`file`](#-kmod--alias--file)
+* [`aliasname`](#-kmod--alias--aliasname)
 
-##### <a name="source"></a>`source`
+##### <a name="-kmod--alias--source"></a>`source`
 
 Data type: `String[1]`
 
 Name of the module to alias
 
-##### <a name="ensure"></a>`ensure`
+##### <a name="-kmod--alias--ensure"></a>`ensure`
 
 Data type: `Enum['present', 'absent']`
 
@@ -187,7 +191,7 @@ State of the alias
 
 Default value: `'present'`
 
-##### <a name="file"></a>`file`
+##### <a name="-kmod--alias--file"></a>`file`
 
 Data type: `Stdlib::Unixpath`
 
@@ -195,7 +199,7 @@ File to manage
 
 Default value: `"/etc/modprobe.d/${name}.conf"`
 
-##### <a name="aliasname"></a>`aliasname`
+##### <a name="-kmod--alias--aliasname"></a>`aliasname`
 
 Data type: `String[1]`
 
@@ -203,7 +207,7 @@ Name of the alias (defaults to the resource title)
 
 Default value: `$name`
 
-### <a name="kmodblacklist"></a>`kmod::blacklist`
+### <a name="kmod--blacklist"></a>`kmod::blacklist`
 
 Set a kernel module as blacklisted.
 
@@ -219,10 +223,10 @@ kmod::blacklist { 'pcspkr': }
 
 The following parameters are available in the `kmod::blacklist` defined type:
 
-* [`ensure`](#ensure)
-* [`file`](#file)
+* [`ensure`](#-kmod--blacklist--ensure)
+* [`file`](#-kmod--blacklist--file)
 
-##### <a name="ensure"></a>`ensure`
+##### <a name="-kmod--blacklist--ensure"></a>`ensure`
 
 Data type: `Enum['present', 'absent']`
 
@@ -230,7 +234,7 @@ State of the setting
 
 Default value: `'present'`
 
-##### <a name="file"></a>`file`
+##### <a name="-kmod--blacklist--file"></a>`file`
 
 Data type: `Stdlib::Unixpath`
 
@@ -238,7 +242,7 @@ File to manage
 
 Default value: `'/etc/modprobe.d/blacklist.conf'`
 
-### <a name="kmodinstall"></a>`kmod::install`
+### <a name="kmod--install"></a>`kmod::install`
 
 Set a kernel module as installed
 
@@ -254,11 +258,11 @@ kmod::install { 'pcspkr': }
 
 The following parameters are available in the `kmod::install` defined type:
 
-* [`ensure`](#ensure)
-* [`command`](#command)
-* [`file`](#file)
+* [`ensure`](#-kmod--install--ensure)
+* [`command`](#-kmod--install--command)
+* [`file`](#-kmod--install--file)
 
-##### <a name="ensure"></a>`ensure`
+##### <a name="-kmod--install--ensure"></a>`ensure`
 
 Data type: `Enum['present', 'absent']`
 
@@ -266,7 +270,7 @@ State of the setting
 
 Default value: `'present'`
 
-##### <a name="command"></a>`command`
+##### <a name="-kmod--install--command"></a>`command`
 
 Data type: `String[1]`
 
@@ -274,7 +278,7 @@ Command associated with the kernel module
 
 Default value: `'/bin/true'`
 
-##### <a name="file"></a>`file`
+##### <a name="-kmod--install--file"></a>`file`
 
 Data type: `Stdlib::Unixpath`
 
@@ -282,7 +286,7 @@ File where the stanza is written
 
 Default value: `"/etc/modprobe.d/${name}.conf"`
 
-### <a name="kmodload"></a>`kmod::load`
+### <a name="kmod--load"></a>`kmod::load`
 
 Manage a kernel module in /etc/modules.
 
@@ -298,10 +302,10 @@ kmod::load { 'sha256': }
 
 The following parameters are available in the `kmod::load` defined type:
 
-* [`ensure`](#ensure)
-* [`file`](#file)
+* [`ensure`](#-kmod--load--ensure)
+* [`file`](#-kmod--load--file)
 
-##### <a name="ensure"></a>`ensure`
+##### <a name="-kmod--load--ensure"></a>`ensure`
 
 Data type: `Enum['present', 'absent']`
 
@@ -309,7 +313,7 @@ State of the setting
 
 Default value: `'present'`
 
-##### <a name="file"></a>`file`
+##### <a name="-kmod--load--file"></a>`file`
 
 Data type: `Stdlib::Unixpath`
 
@@ -318,7 +322,7 @@ used for systems running systemd.
 
 Default value: `'/etc/modules'`
 
-### <a name="kmodoption"></a>`kmod::option`
+### <a name="kmod--option"></a>`kmod::option`
 
 Manage kernel module options
 
@@ -338,25 +342,25 @@ kmod::option { 'bond0 mode':
 
 The following parameters are available in the `kmod::option` defined type:
 
-* [`option`](#option)
-* [`value`](#value)
-* [`module`](#module)
-* [`ensure`](#ensure)
-* [`file`](#file)
+* [`option`](#-kmod--option--option)
+* [`value`](#-kmod--option--value)
+* [`module`](#-kmod--option--module)
+* [`ensure`](#-kmod--option--ensure)
+* [`file`](#-kmod--option--file)
 
-##### <a name="option"></a>`option`
+##### <a name="-kmod--option--option"></a>`option`
 
 Data type: `String[1]`
 
 Option to manage
 
-##### <a name="value"></a>`value`
+##### <a name="-kmod--option--value"></a>`value`
 
 Data type: `Scalar`
 
 Value of kernel module option
 
-##### <a name="module"></a>`module`
+##### <a name="-kmod--option--module"></a>`module`
 
 Data type: `String[1]`
 
@@ -364,7 +368,7 @@ Kernel module to manage
 
 Default value: `$name`
 
-##### <a name="ensure"></a>`ensure`
+##### <a name="-kmod--option--ensure"></a>`ensure`
 
 Data type: `Enum['present', 'absent']`
 
@@ -372,7 +376,7 @@ State of the option
 
 Default value: `'present'`
 
-##### <a name="file"></a>`file`
+##### <a name="-kmod--option--file"></a>`file`
 
 Data type: `Stdlib::Unixpath`
 
@@ -380,7 +384,7 @@ File to manage
 
 Default value: `"/etc/modprobe.d/${module}.conf"`
 
-### <a name="kmodsetting"></a>`kmod::setting`
+### <a name="kmod--setting"></a>`kmod::setting`
 
 Manage kernel module settings
 
@@ -403,42 +407,42 @@ kmod__setting { 'kmod::option bond0 mode':
 
 The following parameters are available in the `kmod::setting` defined type:
 
-* [`file`](#file)
-* [`category`](#category)
-* [`option`](#option)
-* [`value`](#value)
-* [`module`](#module)
-* [`ensure`](#ensure)
+* [`file`](#-kmod--setting--file)
+* [`category`](#-kmod--setting--category)
+* [`option`](#-kmod--setting--option)
+* [`value`](#-kmod--setting--value)
+* [`module`](#-kmod--setting--module)
+* [`ensure`](#-kmod--setting--ensure)
 
-##### <a name="file"></a>`file`
+##### <a name="-kmod--setting--file"></a>`file`
 
 Data type: `Stdlib::Unixpath`
 
 File to manage
 
-##### <a name="category"></a>`category`
+##### <a name="-kmod--setting--category"></a>`category`
 
 Data type: `String[1]`
 
 Setting type
 
-##### <a name="option"></a>`option`
+##### <a name="-kmod--setting--option"></a>`option`
 
 Data type: `Optional[String]`
 
 Key to manage
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="value"></a>`value`
+##### <a name="-kmod--setting--value"></a>`value`
 
 Data type: `Optional[Scalar]`
 
 Value to manage
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="module"></a>`module`
+##### <a name="-kmod--setting--module"></a>`module`
 
 Data type: `String[1]`
 
@@ -446,7 +450,7 @@ Module to manage
 
 Default value: `$name`
 
-##### <a name="ensure"></a>`ensure`
+##### <a name="-kmod--setting--ensure"></a>`ensure`
 
 Data type: `Enum['present', 'absent']`
 
