@@ -11,7 +11,7 @@ describe 'kmod::load', type: :define do
         data = if facts[:os]['name'] == 'Archlinux'
                  { augeasversion: '1.2.0', service_provider: 'systemd' }
                else
-                 { augeasversion: '1.2.0' }
+                 { augeasversion: '1.2.0', service_provider: nil }
                end
         facts.merge(data)
       end
