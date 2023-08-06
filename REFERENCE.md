@@ -303,7 +303,6 @@ kmod::load { 'sha256': }
 The following parameters are available in the `kmod::load` defined type:
 
 * [`ensure`](#-kmod--load--ensure)
-* [`file`](#-kmod--load--file)
 
 ##### <a name="-kmod--load--ensure"></a>`ensure`
 
@@ -312,15 +311,6 @@ Data type: `Enum['present', 'absent']`
 State of the setting
 
 Default value: `'present'`
-
-##### <a name="-kmod--load--file"></a>`file`
-
-Data type: `Stdlib::Unixpath`
-
-Optionally, set the file where the stanza is written. Not
-used for systems running systemd.
-
-Default value: `'/etc/modules'`
 
 ### <a name="kmod--option"></a>`kmod::option`
 
