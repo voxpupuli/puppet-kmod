@@ -11,7 +11,7 @@ describe 'kmod::load', type: :define do
         data = if facts[:os]['name'] == 'Archlinux'
                  { augeasversion: '1.2.0', service_provider: 'systemd' }
                else
-                 { augeasversion: '1.2.0' }
+                 { augeasversion: '1.2.0', service_provider: nil }
                end
         facts.merge(data)
       end
@@ -44,6 +44,7 @@ describe 'kmod::load', type: :define do
 
           case facts[:osfamily]
           when 'Debian'
+
             it {
               is_expected.to contain_augeas('Manage foo in /foo/bar').
                 with('incl' => '/foo/bar',
@@ -58,6 +59,7 @@ describe 'kmod::load', type: :define do
                      'changes' => "set MODULES_LOADED_ON_BOOT/value[.='foo'] 'foo'")
             }
           when 'RedHat'
+
             it {
               is_expected.to contain_file('/etc/sysconfig/modules/foo.modules').
                 with('ensure' => 'present',
