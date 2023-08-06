@@ -70,12 +70,7 @@ describe 'kmod', type: :class do
 
     context "on #{os} with hash parameters" do
       let(:facts) do
-        data = if facts[:os]['name'] == 'Archlinux'
-                 { augeasversion: '1.2.0', service_provider: 'systemd' }
-               else
-                 { augeasversion: '1.2.0' }
-               end
-        facts.merge(data)
+        facts.merge({ augeasversion: '1.2.0' })
       end
       let(:params) do
         {
