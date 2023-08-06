@@ -4,7 +4,27 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [v3.2.0](https://github.com/voxpupuli/puppet-kmod/tree/v3.2.0) (2022-05-03)
+## [v4.0.0](https://github.com/voxpupuli/puppet-kmod/tree/v4.0.0) (2023-08-06)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-kmod/compare/v3.2.0...v4.0.0)
+
+**Breaking changes:**
+
+- Drop legacy code for non-systemd systems [\#104](https://github.com/voxpupuli/puppet-kmod/pull/104) ([bastelfreak](https://github.com/bastelfreak))
+- Drop EoL Debian 9 [\#103](https://github.com/voxpupuli/puppet-kmod/pull/103) ([bastelfreak](https://github.com/bastelfreak))
+- Drop Puppet 6 support [\#95](https://github.com/voxpupuli/puppet-kmod/pull/95) ([bastelfreak](https://github.com/bastelfreak))
+
+**Implemented enhancements:**
+
+- Add AlmaLinux/Rocky support [\#102](https://github.com/voxpupuli/puppet-kmod/pull/102) ([bastelfreak](https://github.com/bastelfreak))
+- Add Puppet 8 support [\#99](https://github.com/voxpupuli/puppet-kmod/pull/99) ([bastelfreak](https://github.com/bastelfreak))
+- puppetlabs/stdlib: Allow 9.x [\#97](https://github.com/voxpupuli/puppet-kmod/pull/97) ([bastelfreak](https://github.com/bastelfreak))
+
+**Fixed bugs:**
+
+- Replace egrep usage with grep -E [\#92](https://github.com/voxpupuli/puppet-kmod/pull/92) ([mika](https://github.com/mika))
+
+## [v3.2.0](https://github.com/voxpupuli/puppet-kmod/tree/v3.2.0) (2022-05-04)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-kmod/compare/v3.1.1...v3.2.0)
 
