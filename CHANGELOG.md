@@ -4,7 +4,19 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [v4.0.0](https://github.com/voxpupuli/puppet-kmod/tree/v4.0.0) (2023-08-06)
+## [v4.0.1](https://github.com/voxpupuli/puppet-kmod/tree/v4.0.1) (2023-10-02)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-kmod/compare/v4.0.0...v4.0.1)
+
+**Fixed bugs:**
+
+- kmods fact produces null byte in parameters datastructure [\#98](https://github.com/voxpupuli/puppet-kmod/issues/98)
+
+**Merged pull requests:**
+
+- Strip null bytes in kmods fact [\#107](https://github.com/voxpupuli/puppet-kmod/pull/107) ([saz](https://github.com/saz))
+
+## [v4.0.0](https://github.com/voxpupuli/puppet-kmod/tree/v4.0.0) (2023-08-07)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-kmod/compare/v3.2.0...v4.0.0)
 
