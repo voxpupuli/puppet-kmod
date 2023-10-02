@@ -24,7 +24,7 @@ Facter.add(:kmods) do
             next unless File.readable?("/sys/module/#{directory}/parameters/#{param}")
 
             begin
-              kmod[directory]['parameters'][param] = File.read("/sys/module/#{directory}/parameters/#{param}").chomp
+              kmod[directory]['parameters'][param] = File.read("/sys/module/#{directory}/parameters/#{param}").chomp.delete("\u0000")
             rescue StandardError
               # some kernel parameters are write only
               # even though they have the read bit set
