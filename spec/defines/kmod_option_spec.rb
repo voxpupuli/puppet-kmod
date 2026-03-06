@@ -22,13 +22,13 @@ describe 'kmod::option', type: :define do
         it { is_expected.to contain_kmod__option(title).with(params) }
 
         it do
-          is_expected.to contain_kmod__setting("kmod::option #{title}").
-            with_ensure('present').
-            with_module(params['module']).
-            with_category('options').
-            with_file("/etc/modprobe.d/#{params['module']}.conf").
-            with_option(params['option']).
-            with_value(params['value'])
+          is_expected.to contain_kmod__setting("kmod::option #{title}")
+            .with_ensure('present')
+            .with_module(params['module'])
+            .with_category('options')
+            .with_file("/etc/modprobe.d/#{params['module']}.conf")
+            .with_option(params['option'])
+            .with_value(params['value'])
         end
       end
 
@@ -47,11 +47,11 @@ describe 'kmod::option', type: :define do
         it { is_expected.to contain_kmod__option(title) }
 
         it {
-          is_expected.to contain_file("/etc/modprobe.d/#{params['module']}.conf").
-            with(
+          is_expected.to contain_file("/etc/modprobe.d/#{params['module']}.conf")
+            .with(
               'owner' => 'adm',
               'group' => 'sys',
-              'mode' => '0600'
+              'mode' => '0600',
             )
         }
       end
