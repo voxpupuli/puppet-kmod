@@ -19,13 +19,13 @@ describe 'kmod::alias', type: :define do
         it { is_expected.to contain_kmod__alias('foo') }
 
         it {
-          is_expected.to contain_kmod__setting('kmod::alias foo').
-            with('ensure' => 'present',
-                 'module' => 'foo',
-                 'file' => '/baz',
-                 'category' => 'alias',
-                 'option' => 'modulename',
-                 'value' => 'bar')
+          is_expected.to contain_kmod__setting('kmod::alias foo')
+            .with('ensure' => 'present',
+                  'module' => 'foo',
+                  'file' => '/baz',
+                  'category' => 'alias',
+                  'option' => 'modulename',
+                  'value' => 'bar')
         }
       end
 
@@ -35,13 +35,13 @@ describe 'kmod::alias', type: :define do
         it { is_expected.to contain_kmod__alias('foo') }
 
         it {
-          is_expected.to contain_kmod__setting('kmod::alias foo').
-            with('ensure' => 'present',
-                 'module' => 'tango',
-                 'file' => '/baz',
-                 'category' => 'alias',
-                 'option' => 'modulename',
-                 'value' => 'bar')
+          is_expected.to contain_kmod__setting('kmod::alias foo')
+            .with('ensure' => 'present',
+                  'module' => 'tango',
+                  'file' => '/baz',
+                  'category' => 'alias',
+                  'option' => 'modulename',
+                  'value' => 'bar')
         }
       end
 
@@ -51,8 +51,8 @@ describe 'kmod::alias', type: :define do
         it { is_expected.to contain_kmod__alias('foo') }
 
         it {
-          is_expected.to contain_kmod__setting('kmod::alias foo').
-            with('ensure' => 'absent')
+          is_expected.to contain_kmod__setting('kmod::alias foo')
+            .with('ensure' => 'absent')
         }
       end
 
@@ -71,11 +71,11 @@ describe 'kmod::alias', type: :define do
         it { is_expected.to contain_kmod__alias('foo') }
 
         it {
-          is_expected.to contain_file(params[:file]).
-            with(
+          is_expected.to contain_file(params[:file])
+            .with(
               'owner' => 'adm',
               'group' => 'sys',
-              'mode' => '0600'
+              'mode' => '0600',
             )
         }
       end

@@ -17,13 +17,13 @@ describe 'kmod::install', type: :define do
         it { is_expected.to contain_kmod__install('foo') }
 
         it {
-          is_expected.to contain_kmod__setting('kmod::install foo').
-            with('ensure' => 'present',
-                 'category' => 'install',
-                 'module' => 'foo',
-                 'option' => 'command',
-                 'value' => '/bin/true',
-                 'file' => '/etc/modprobe.d/foo.conf')
+          is_expected.to contain_kmod__setting('kmod::install foo')
+            .with('ensure' => 'present',
+                  'category' => 'install',
+                  'module' => 'foo',
+                  'option' => 'command',
+                  'value' => '/bin/true',
+                  'file' => '/etc/modprobe.d/foo.conf')
         }
       end
 
@@ -41,11 +41,11 @@ describe 'kmod::install', type: :define do
         it { is_expected.to contain_kmod__install('foo') }
 
         it {
-          is_expected.to contain_file(params[:file]).
-            with(
+          is_expected.to contain_file(params[:file])
+            .with(
               'owner' => 'adm',
               'group' => 'sys',
-              'mode' => '0600'
+              'mode' => '0600',
             )
         }
       end

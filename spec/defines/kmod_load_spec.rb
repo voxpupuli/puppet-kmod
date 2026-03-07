@@ -16,43 +16,37 @@ describe 'kmod::load', type: :define do
 
         it { is_expected.to contain_kmod__load('foo') }
 
-        it {
-          is_expected.to contain_exec('modprobe foo').
-            with('unless' => "grep -qE '^foo ' /proc/modules")
-        }
+        it { is_expected.to contain_exec('modprobe foo').with('unless' => "grep -qE '^foo ' /proc/modules") }
 
         context 'when on systemd' do
           it {
-            is_expected.to contain_file('/etc/modules-load.d/foo.conf').
-              with('ensure' => 'present',
-                   'mode' => '0644',
-                   'content' => "# This file is managed by the puppet kmod module.\nfoo\n")
+            is_expected.to contain_file('/etc/modules-load.d/foo.conf')
+              .with('ensure' => 'present',
+                    'mode' => '0644',
+                    'content' => "# This file is managed by the puppet kmod module.\nfoo\n")
           }
         end
       end
 
       context 'with ensure set to absent' do
-        let(:params) { { ensure: 'absent', } }
+        let(:params) { { ensure: 'absent' } }
 
         it { is_expected.to contain_kmod__load('foo') }
 
-        it {
-          is_expected.to contain_exec('modprobe -r foo').
-            with('onlyif' => "grep -qE '^foo ' /proc/modules")
-        }
+        it { is_expected.to contain_exec('modprobe -r foo').with('onlyif' => "grep -qE '^foo ' /proc/modules") }
 
         context 'when on systemd' do
           it {
-            is_expected.to contain_file('/etc/modules-load.d/foo.conf').
-              with('ensure' => 'absent',
-                   'mode' => '0644',
-                   'content' => "# This file is managed by the puppet kmod module.\nfoo\n")
+            is_expected.to contain_file('/etc/modules-load.d/foo.conf')
+              .with('ensure' => 'absent',
+                    'mode' => '0644',
+                    'content' => "# This file is managed by the puppet kmod module.\nfoo\n")
           }
         end
       end
 
       context 'when file permissions are specified' do
-        let(:params) { { ensure: 'present', } }
+        let(:params) { { ensure: 'present' } }
         let(:pre_condition) do
           <<~END
             class { 'kmod':
@@ -67,11 +61,11 @@ describe 'kmod::load', type: :define do
         it { is_expected.to contain_kmod__load('foo') }
 
         it do
-          is_expected.to contain_file('/etc/modules-load.d/foo.conf').
-            with(
+          is_expected.to contain_file('/etc/modules-load.d/foo.conf')
+            .with(
               'owner' => 'adm',
               'group' => 'sys',
-              'mode' => '0600'
+              'mode' => '0600',
             )
         end
       end

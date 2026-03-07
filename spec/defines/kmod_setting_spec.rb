@@ -20,11 +20,11 @@ describe 'kmod::setting', type: :define do
         it { is_expected.to contain_kmod__setting('foo') }
 
         it {
-          is_expected.to contain_augeas('kmod::setting foo foo').
-            with('incl' => '/etc/modprobe.conf',
-                 'lens' => 'Modprobe.lns',
-                 'changes' => ["set alias[. = 'foo'] foo", "set alias[. = 'foo']/modulename tango"],
-                 'require' => 'File[/etc/modprobe.conf]')
+          is_expected.to contain_augeas('kmod::setting foo foo')
+            .with('incl' => '/etc/modprobe.conf',
+                  'lens' => 'Modprobe.lns',
+                  'changes' => ["set alias[. = 'foo'] foo", "set alias[. = 'foo']/modulename tango"],
+                  'require' => 'File[/etc/modprobe.conf]')
         }
       end
 
@@ -34,11 +34,11 @@ describe 'kmod::setting', type: :define do
         it { is_expected.to contain_kmod__setting('foo') }
 
         it {
-          is_expected.to contain_augeas('kmod::setting foo foo').
-            with('incl' => '/etc/modprobe.d/blacklist.conf',
-                 'lens' => 'Modprobe.lns',
-                 'changes' => ["set blacklist[. = 'foo'] foo"],
-                 'require' => 'File[/etc/modprobe.d/blacklist.conf]')
+          is_expected.to contain_augeas('kmod::setting foo foo')
+            .with('incl' => '/etc/modprobe.d/blacklist.conf',
+                  'lens' => 'Modprobe.lns',
+                  'changes' => ["set blacklist[. = 'foo'] foo"],
+                  'require' => 'File[/etc/modprobe.d/blacklist.conf]')
         }
       end
 
@@ -47,7 +47,7 @@ describe 'kmod::setting', type: :define do
           default_params.merge(
             category: 'install',
             option: 'command',
-            value: '/bin/true'
+            value: '/bin/true',
           )
         end
         let(:pre_condition) do
@@ -63,19 +63,19 @@ describe 'kmod::setting', type: :define do
         it { is_expected.to contain_kmod__setting('foo') }
 
         it {
-          is_expected.to contain_augeas('kmod::setting foo foo').
-            with('incl' => '/etc/modprobe.conf',
-                 'lens' => 'Modprobe.lns',
-                 'changes' => ["set install[. = 'foo'] foo", "set install[. = 'foo']/command /bin/true"],
-                 'require' => 'File[/etc/modprobe.conf]')
+          is_expected.to contain_augeas('kmod::setting foo foo')
+            .with('incl' => '/etc/modprobe.conf',
+                  'lens' => 'Modprobe.lns',
+                  'changes' => ["set install[. = 'foo'] foo", "set install[. = 'foo']/command /bin/true"],
+                  'require' => 'File[/etc/modprobe.conf]')
         }
 
         it {
-          is_expected.to contain_file(params[:file]).
-            with(
+          is_expected.to contain_file(params[:file])
+            .with(
               'owner' => 'adm',
               'group' => 'sys',
-              'mode' => '0600'
+              'mode' => '0600',
             )
         }
       end

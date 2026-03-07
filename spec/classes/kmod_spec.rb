@@ -16,7 +16,7 @@ describe 'kmod', type: :class do
           'ensure' => 'directory',
           'owner' => 'root',
           'group' => 'root',
-          'mode' => '0755'
+          'mode' => '0755',
         )
       end
 
@@ -26,7 +26,7 @@ describe 'kmod', type: :class do
             'ensure' => 'file',
             'owner' => 'root',
             'group' => 'root',
-            'mode' => '0644'
+            'mode' => '0644',
           )
         end
       end
@@ -52,7 +52,7 @@ describe 'kmod', type: :class do
           'ensure' => 'directory',
           'owner' => params['owner'],
           'group' => params['group'],
-          'mode' => params['directory_mode']
+          'mode' => params['directory_mode'],
         )
       end
 
@@ -62,7 +62,7 @@ describe 'kmod', type: :class do
             'ensure' => 'file',
             'owner' => params['owner'],
             'group' => params['group'],
-            'mode' => params['file_mode']
+            'mode' => params['file_mode'],
           )
         end
       end
