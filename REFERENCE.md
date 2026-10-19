@@ -25,7 +25,7 @@ Ensures a couple of mandatory files are present before managing their content.
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 include kmod
@@ -160,7 +160,7 @@ Manage kernel module aliases
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 kmod::alias { 'bond0':
@@ -213,7 +213,7 @@ Set a kernel module as blacklisted.
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 kmod::blacklist { 'pcspkr': }
@@ -248,7 +248,7 @@ Set a kernel module as installed
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 kmod::install { 'pcspkr': }
@@ -292,7 +292,7 @@ Manage a kernel module in /etc/modules.
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 kmod::load { 'sha256': }
@@ -318,7 +318,7 @@ Manage kernel module options
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 kmod::option { 'bond0 mode':
@@ -380,7 +380,7 @@ Manage kernel module settings
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 kmod__setting { 'kmod::option bond0 mode':
@@ -447,4 +447,3 @@ Data type: `Enum['present', 'absent']`
 State of the setting
 
 Default value: `'present'`
-
