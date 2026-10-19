@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v5.1.0](https://github.com/voxpupuli/puppet-kmod/tree/v5.1.0) (2026-10-19)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-kmod/compare/v5.0.0...v5.1.0)
+
+**Implemented enhancements:**
+
+- puppetlabs/stdlib: Allow 10.x [\#141](https://github.com/voxpupuli/puppet-kmod/pull/141) ([bastelfreak](https://github.com/bastelfreak))
+- Update requirements to allow OpenVox 9 [\#140](https://github.com/voxpupuli/puppet-kmod/pull/140) ([sebastianrakel](https://github.com/sebastianrakel))
+
 ## [v5.0.0](https://github.com/voxpupuli/puppet-kmod/tree/v5.0.0) (2025-11-11)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-kmod/compare/v4.1.0...v5.0.0)
